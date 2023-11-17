@@ -1,0 +1,3 @@
+[submodule "QuasarEngine/vendor/spdlog"]
+	path = QuasarEngine/vendor/spdlog
+	url = https://github.com/gabime/spdlog
