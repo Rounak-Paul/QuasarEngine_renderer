@@ -13,6 +13,9 @@ namespace Quasar {
 		void Run();
 	};
 
+	// to be defined in Client
+	Application* CreateApplication();
+
 }
 
 

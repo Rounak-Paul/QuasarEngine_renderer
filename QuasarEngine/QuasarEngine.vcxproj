@@ -82,8 +82,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Quasar.h" />
     <ClInclude Include="src\Quasar\Application.h" />
     <ClInclude Include="src\Quasar\Core.h" />
+    <ClInclude Include="src\Quasar\EntryPoint.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Quasar\Application.cpp" />

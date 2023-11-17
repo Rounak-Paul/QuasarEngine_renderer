@@ -21,6 +21,12 @@
     <ClInclude Include="src\Quasar\Application.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Quasar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Quasar\EntryPoint.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Quasar\Application.cpp">
