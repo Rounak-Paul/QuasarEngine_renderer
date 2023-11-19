@@ -33,3 +33,7 @@
 
 # Visual Studio
 .vs
+
+# Build Dirs
+bin
+bin-int

@@ -1,7 +1,7 @@
 workspace "QuasarEngine"
 	architecture "x64"
 
-	configuration
+	configurations
 	{
 		"Debug",
 		"Release",
@@ -20,18 +20,18 @@ project "QuasarEngine"
 
 	files
 	{
-		"%{prj.name}/src/**.h"
+		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp"
 	}
 
-	include
+	includedirs
 	{
 		"%{prj.name}/vendor/spdlog/include"
 	}
 
 	filter "system:windows"
 		cppdialect "c++20"
-		ststicruntime "On"
+		staticruntime "On"
 		systemversion "latest"
 
 		defines 
@@ -67,13 +67,13 @@ project "Sandbox"
 
 	files
 	{
-		"%{prj.name}/src/**.h"
+		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp"
 	}
 
-	include
+	includedirs
 	{
-		"%{prj.name}/vendor/spdlog/include"
+		"QuasarEngine/vendor/spdlog/include",
 		"QuasarEngine/src"
 	}
 
@@ -84,17 +84,12 @@ project "Sandbox"
 
 	filter "system:windows"
 		cppdialect "c++20"
-		ststicruntime "On"
+		staticruntime "On"
 		systemversion "latest"
 
 		defines 
 		{
 			"QS_PLATFORM_WINDOWS"
-		}
-
-		postbuildcommands
-		{
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
 		}
 
 	filter "configurations:Debug"
