@@ -1,5 +1,9 @@
+include "./vendor/premake/premake_customization/solution_items.lua"
+include "Dependencies.lua"
+
 workspace "QuasarEngine"
-	architecture "x64"
+	architecture "x86_64"
+	startproject "Sandbox"
 
 	configurations
 	{
@@ -8,102 +12,26 @@ workspace "QuasarEngine"
 		"Dist"
 	}
 
+	solution_items
+	{
+		".editorconfig"
+	}
+
+	flags
+	{
+		"MultiProcessorCompile"
+	}
+
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
-project "QuasarEngine"
-	location "QuasarEngine"
-	kind "SharedLib"
-	language "C++"
+group "Dependencies"
+	include "vendor/premake"
+group ""
 
-	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
-	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+group "Core"
+	include "QuasarEngine"
+group ""
 
-	pchheader "qspch.h"
-	pchsource "QuasarEngine/src/qspch.cpp"
-
-	files
-	{
-		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp"
-	}
-
-	includedirs
-	{
-		"%{prj.name}/src",
-		"%{prj.name}/vendor/spdlog/include"
-	}
-
-	filter "system:windows"
-		cppdialect "c++20"
-		staticruntime "On"
-		systemversion "latest"
-
-		defines 
-		{
-			"QS_PLATFORM_WINDOWS",
-			"QS_BUILD_DLL"
-		}
-
-		postbuildcommands
-		{
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
-		}
-
-	filter "configurations:Debug"
-		defines "QS_DEBUG"
-		symbols "On"
-
-	filter "configurations:Debug"
-		defines "QS_RELEASE"
-		symbols "On"
-
-	filter "configurations:Debug"
-		defines "QS_DIST"
-		symbols "On"
-
-project "Sandbox"
-	location "Sandbox"
-	kind "ConsoleApp"
-	language "C++"
-
-	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
-	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
-
-	files
-	{
-		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp"
-	}
-
-	includedirs
-	{
-		"QuasarEngine/vendor/spdlog/include",
-		"QuasarEngine/src"
-	}
-
-	links 
-	{
-		"QuasarEngine"
-	}
-
-	filter "system:windows"
-		cppdialect "c++20"
-		staticruntime "On"
-		systemversion "latest"
-
-		defines 
-		{
-			"QS_PLATFORM_WINDOWS"
-		}
-
-	filter "configurations:Debug"
-		defines "QS_DEBUG"
-		symbols "On"
-
-	filter "configurations:Debug"
-		defines "QS_RELEASE"
-		symbols "On"
-
-	filter "configurations:Debug"
-		defines "QS_DIST"
-		symbols "On"
+group "Misc"
+	include "Sandbox"
+group ""

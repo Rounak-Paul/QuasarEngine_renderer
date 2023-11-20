@@ -7,6 +7,11 @@
 *.o
 *.obj
 
+# VS Projects
+*.vcxproj
+*.vcxproj.user
+*.vcxproj.filters
+
 # Precompiled Headers
 *.gch
 *.pch
@@ -37,3 +42,4 @@
 # Build Dirs
 bin
 bin-int
+
