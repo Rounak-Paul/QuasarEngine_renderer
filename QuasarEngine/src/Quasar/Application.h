@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Core.h"
+#include "Quasar/Core.h"
 
 namespace Quasar {
 

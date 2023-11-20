@@ -4,6 +4,9 @@
     <Filter Include="Quasar">
       <UniqueIdentifier>{92394DCD-7EDB-77A3-6796-8BF753D7FEF3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Quasar\EventSystem">
+      <UniqueIdentifier>{486AD886-344E-99DC-9DAE-932F89B1835E}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Quasar.h" />
@@ -16,16 +19,24 @@
     <ClInclude Include="src\Quasar\EntryPoint.h">
       <Filter>Quasar</Filter>
     </ClInclude>
+    <ClInclude Include="src\Quasar\EventSystem\Event.h">
+      <Filter>Quasar\EventSystem</Filter>
+    </ClInclude>
     <ClInclude Include="src\Quasar\Log.h">
       <Filter>Quasar</Filter>
     </ClInclude>
+    <ClInclude Include="src\qspch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Quasar\Application.cpp">
       <Filter>Quasar</Filter>
     </ClCompile>
+    <ClCompile Include="src\Quasar\EventSystem\Event.cpp">
+      <Filter>Quasar\EventSystem</Filter>
+    </ClCompile>
     <ClCompile Include="src\Quasar\Log.cpp">
       <Filter>Quasar</Filter>
     </ClCompile>
+    <ClCompile Include="src\qspch.cpp" />
   </ItemGroup>
 </Project>

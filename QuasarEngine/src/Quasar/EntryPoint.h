@@ -4,9 +4,15 @@
 
 extern Quasar::Application* Quasar::CreateApplication();
 
+void init() {
+	Quasar::Log::Init();
+	Quasar::Event::Init();
+}
+
 int main(int argc, char** argv)
 {
-	Quasar::Log::Init();
+	init();
+
 	QS_CORE_WARN("Initilized Log!");
 	QS_INFO("Hello!");
 

@@ -1,3 +1,4 @@
+#include "qspch.h"
 #include "Application.h"
 
 namespace Quasar {

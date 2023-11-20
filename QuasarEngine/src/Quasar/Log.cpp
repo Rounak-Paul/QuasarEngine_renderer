@@ -1,3 +1,4 @@
+#include "qspch.h"
 #include "Log.h"
 
 namespace Quasar {

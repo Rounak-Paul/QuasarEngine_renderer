@@ -4,6 +4,7 @@
 
 #include "Quasar/Application.h"
 #include "Quasar/Log.h"
+#include "Quasar/EventSystem/Event.h"
 
 // ----- Entry Point -----
 

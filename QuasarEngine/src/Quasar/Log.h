@@ -1,10 +1,9 @@
 #pragma once
 
-#include <memory>
-
-#include "Core.h"
+#include "Quasar/Core.h"
 #include "spdlog/spdlog.h"
 #include "spdlog/sinks/stdout_color_sinks.h"
+#include "spdlog/fmt/ostr.h"
 
 namespace Quasar {
 
@@ -23,14 +22,14 @@ namespace Quasar {
 }
 
 // Core Log 
-#define QS_CORE_FATAL(...)	::Quasar::Log::GetCoreLogger()->fatal(__VA_ARGS__)
+//#define QS_CORE_FATAL(...)	::Quasar::Log::GetCoreLogger()->fatal(__VA_ARGS__)
 #define QS_CORE_ERROR(...)	::Quasar::Log::GetCoreLogger()->error(__VA_ARGS__)
 #define QS_CORE_WARN(...)	::Quasar::Log::GetCoreLogger()->warn(__VA_ARGS__)
 #define QS_CORE_INFO(...)	::Quasar::Log::GetCoreLogger()->info(__VA_ARGS__)
 #define QS_CORE_TRACE(...)	::Quasar::Log::GetCoreLogger()->trace(__VA_ARGS__)
 
 // Client Log
-#define QS_FATAL(...)	::Quasar::Log::GetClientLogger()->fatal(__VA_ARGS__)
+//#define QS_FATAL(...)	::Quasar::Log::GetClientLogger()->fatal(__VA_ARGS__)
 #define QS_ERROR(...)	::Quasar::Log::GetClientLogger()->error(__VA_ARGS__)
 #define QS_WARN(...)	::Quasar::Log::GetClientLogger()->warn(__VA_ARGS__)
 #define QS_INFO(...)	::Quasar::Log::GetClientLogger()->info(__VA_ARGS__)
