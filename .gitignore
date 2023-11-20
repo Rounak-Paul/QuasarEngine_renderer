@@ -8,6 +8,7 @@
 *.obj
 
 # VS Projects
+*.sln
 *.vcxproj
 *.vcxproj.user
 *.vcxproj.filters
