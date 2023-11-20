@@ -3,7 +3,16 @@
 
 namespace Quasar
 {
-	void Event::Init()
+	Event::Event() 
+	{
+
+	}
+	Event::~Event()
+	{
+
+	}
+
+	void Event::Init() 
 	{
 
 	}
