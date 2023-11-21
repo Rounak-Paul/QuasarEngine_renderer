@@ -18,6 +18,8 @@ namespace Quasar
 
 		inline bool shouldClose() { return glfwWindowShouldClose(window); }
 
+		void CreateWindowSurface(VkInstance instance, VkSurfaceKHR *surface);
+
 	private:
 		void InitWindow();
 

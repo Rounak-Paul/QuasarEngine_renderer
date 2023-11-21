@@ -12,6 +12,10 @@
 #include <vector>
 #include <unordered_map>
 #include <unordered_set>
+#include <cstring>
+#include <set>
+
+#include "Quasar/Log/Log.h"
 
 #ifdef QS_PLATFORM_WINDOWS
 	#include <Windows.h>
