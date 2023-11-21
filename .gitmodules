@@ -1,3 +1,9 @@
 [submodule "QuasarEngine/vendor/spdlog"]
 	path = QuasarEngine/vendor/spdlog
 	url = https://github.com/gabime/spdlog
+[submodule "QuasarEngine/vendor/glm"]
+	path = QuasarEngine/vendor/glm
+	url = https://github.com/g-truc/glm.git
+[submodule "QuasarEngine/vendor/glfw"]
+	path = QuasarEngine/vendor/glfw
+	url = https://github.com/Rounak-Paul/glfw.git

@@ -5,7 +5,7 @@ class Sandbox : public Quasar::Application
 public:
 	Sandbox()
 	{
-		QS_TRACE("Test from client");
+		
 	}
 	~Sandbox()
 	{
