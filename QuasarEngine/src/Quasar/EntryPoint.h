@@ -4,12 +4,19 @@
 
 extern Quasar::Application* Quasar::CreateApplication();
 
+/// <summary>
+/// Init method for Core Engine
+/// </summary>
+void init() {
+	Quasar::Log::Init();
+	QS_CORE_INFO("Initiating Quasar Engine...");
+
+	Quasar::Event::Init();
+}
+
 int main(int argc, char** argv)
 {
-	Quasar::Log::Init();
-	QS_CORE_WARN("Initilized Log!");
-	QS_INFO("Hello!");
-
+	init();
 
 	auto app = Quasar::CreateApplication();
 	app->Run();
