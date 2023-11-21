@@ -21,8 +21,7 @@ project "QuasarEngine"
 
 	defines
 	{
-		"QS_BUILD_DLL",
-		"GLFW_INCLUDE_VULKAN",
+		"QS_BUILD_DLL"
 		
 	}
 
@@ -31,13 +30,20 @@ project "QuasarEngine"
 		"src",
 		"vendor/spdlog/include",
 		"%{IncludeDir.glm}",
-		"%{IncludeDir.VulkanSDK}"
+		"%{IncludeDir.VulkanSDK}",
 		"%{IncludeDir.GLFW}",
 	}
 
 	links
 	{
-		"GLFW",
+		"%{Library.Vulkan}",
+		"%{Library.GLFW}",
+	}
+
+	libdirs
+	{
+		"%{LibraryDir.VulkanSDK}",
+		"%{LibraryDir.GLFWSDK}",
 	}
 
 	postbuildcommands

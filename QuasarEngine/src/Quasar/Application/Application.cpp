@@ -15,7 +15,10 @@ namespace Quasar {
 
 	void Application::Run() 
 	{
-		while (true);
+		while (!window.shouldClose())
+		{
+			glfwPollEvents();
+		}
 	}
 
 }

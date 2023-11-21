@@ -26,7 +26,6 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 group "Dependencies"
 	include "vendor/premake"
-	include "QuasarEngine/vendor/GLFW"
 group ""
 
 group "Core"

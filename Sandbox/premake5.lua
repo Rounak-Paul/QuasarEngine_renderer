@@ -22,8 +22,9 @@ project "Sandbox"
 	{
 		"%{wks.location}/QuasarEngine/vendor/spdlog/include",
 		"%{wks.location}/QuasarEngine/src",
-		"%{wks.location}/QuasarEngine/vendor",
 		"%{IncludeDir.glm}",
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.VulkanSDK}",
 	}
 
 	links
