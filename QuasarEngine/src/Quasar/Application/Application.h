@@ -1,8 +1,9 @@
 #pragma once
 
-#include "Quasar/Core.h"
+#include <Quasar/Core.h>
 
-#include "Quasar/Window/Window.h"
+#include "qspch.h"
+
 
 namespace Quasar {
 
@@ -14,8 +15,18 @@ namespace Quasar {
 
 		void Run();
 
+		static constexpr int WIDTH = 800;
+		static constexpr int HEIGHT = 600;
+
 	private:
-		Window window{ 800, 600, "QuasarEngine" };
+		Window window{ WIDTH, HEIGHT, "QuasarEngine" };
+		Device device{ window };
+		Pipeline pipeline{
+			device,
+			"",
+			"",
+			Pipeline::DefaultPipelineConfigInfo(WIDTH, HEIGHT)
+		};
 	};
 
 	// To be defined in Client

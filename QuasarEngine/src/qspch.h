@@ -15,7 +15,10 @@
 #include <cstring>
 #include <set>
 
-#include "Quasar/Log/Log.h"
+#include <Quasar/Log/Log.h>
+#include <Quasar/Window/Window.h>
+#include <Quasar/Device/Device.h>
+#include <Quasar/Pipeline/Pipeline.h>
 
 #ifdef QS_PLATFORM_WINDOWS
 	#include <Windows.h>

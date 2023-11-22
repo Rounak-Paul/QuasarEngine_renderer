@@ -16,7 +16,7 @@ namespace Quasar
 		Window(const Window&) = delete;
 		Window& operator=(const Window&) = delete;
 
-		inline bool shouldClose() { return glfwWindowShouldClose(window); }
+		inline bool ShouldClose() { return glfwWindowShouldClose(window); }
 
 		void CreateWindowSurface(VkInstance instance, VkSurfaceKHR *surface);
 
