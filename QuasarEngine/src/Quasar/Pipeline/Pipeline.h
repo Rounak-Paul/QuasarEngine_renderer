@@ -33,6 +33,9 @@ namespace Quasar {
 		Pipeline(const Pipeline&) = delete;
 		void operator=(const Pipeline&) = delete;
 
+
+		void Bind(VkCommandBuffer commandBuffer);
+
 		static PipelineConfigInfo DefaultPipelineConfigInfo(uint32_t width, uint32_t height);
 
 	private:

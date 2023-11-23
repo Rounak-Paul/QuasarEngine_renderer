@@ -530,4 +530,4 @@ namespace Quasar {
 		}
 	}
 
-}  // namespace lve
+}
