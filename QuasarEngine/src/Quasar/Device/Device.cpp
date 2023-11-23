@@ -111,7 +111,7 @@ namespace Quasar {
 		if (deviceCount == 0) {
 			QS_CORE_ERROR("failed to find GPUs with Vulkan support!");
 		}
-		if (QS_DEBUG) QS_CORE_INFO("Device count: {0}", deviceCount);
+		if (QS_DEBUG) QS_CORE_TRACE("Device count: {0}", deviceCount);
 		std::vector<VkPhysicalDevice> devices(deviceCount);
 		vkEnumeratePhysicalDevices(instance, &deviceCount, devices.data());
 
@@ -127,7 +127,7 @@ namespace Quasar {
 		}
 
 		vkGetPhysicalDeviceProperties(physicalDevice, &properties);
-		if (QS_DEBUG) QS_CORE_INFO(properties.deviceName);
+		if (QS_DEBUG) QS_CORE_TRACE("Active Device: {0}", properties.deviceName);
 	}
 
 	void Device::createLogicalDevice() {
@@ -278,17 +278,17 @@ namespace Quasar {
 		std::vector<VkExtensionProperties> extensions(extensionCount);
 		vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, extensions.data());
 
-		if(QS_DEBUG) QS_CORE_TRACE("available extensions:");
+		//if(QS_DEBUG) QS_CORE_TRACE("available extensions:");
 		std::unordered_set<std::string> available;
 		for (const auto& extension : extensions) {
-			if (QS_DEBUG) QS_CORE_TRACE(extension.extensionName);
+			//if (QS_DEBUG) QS_CORE_TRACE(extension.extensionName);
 			available.insert(extension.extensionName);
 		}
 
-		if (QS_DEBUG) QS_CORE_TRACE("required extensions:");
+		//if (QS_DEBUG) QS_CORE_TRACE("required extensions:");
 		auto requiredExtensions = getRequiredExtensions();
 		for (const auto& required : requiredExtensions) {
-			if (QS_DEBUG) QS_CORE_TRACE(required);
+			//if (QS_DEBUG) QS_CORE_TRACE(required);
 			if (available.find(required) == available.end()) {
 				QS_CORE_ERROR("Missing required glfw extension");
 			}
