@@ -4,7 +4,21 @@
 
 namespace Quasar {
 
-	struct PipelineConfigInfo {};
+	struct PipelineConfigInfo 
+	{
+		VkViewport viewport;
+		VkRect2D scissor;
+		VkPipelineViewportStateCreateInfo viewportInfo;
+		VkPipelineInputAssemblyStateCreateInfo inputAssemblyInfo;
+		VkPipelineRasterizationStateCreateInfo rasterizationInfo;
+		VkPipelineMultisampleStateCreateInfo multisampleInfo;
+		VkPipelineColorBlendAttachmentState colorBlendAttachment;
+		VkPipelineColorBlendStateCreateInfo colorBlendInfo;
+		VkPipelineDepthStencilStateCreateInfo depthStencilInfo;
+		VkPipelineLayout pipelineLayout = nullptr;
+		VkRenderPass renderPass = nullptr;
+		uint32_t subpass = 0;
+	};
 
 	class Pipeline
 	{
@@ -15,7 +29,7 @@ namespace Quasar {
 			const std::string& fragFilePath,
 			const PipelineConfigInfo& configInfo
 		);
-		~Pipeline() {}
+		~Pipeline();
 
 		Pipeline(const Pipeline&) = delete;
 		void operator=(const Pipeline&) = delete;

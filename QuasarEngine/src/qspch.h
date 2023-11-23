@@ -5,6 +5,7 @@
 #include <utility>
 #include <algorithm>
 #include <functional>
+#include <cassert>
 
 #include <string>
 #include <sstream>
