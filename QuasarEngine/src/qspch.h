@@ -6,6 +6,9 @@
 #include <algorithm>
 #include <functional>
 #include <cassert>
+#include <cstdlib>
+#include <limits>
+#include <stdexcept>
 
 #include <string>
 #include <sstream>
@@ -20,6 +23,7 @@
 #include <Quasar/Window/Window.h>
 #include <Quasar/Device/Device.h>
 #include <Quasar/Pipeline/Pipeline.h>
+#include <Quasar/SwapChain/SwapChain.h>
 
 #ifdef QS_PLATFORM_WINDOWS
 	#include <Windows.h>

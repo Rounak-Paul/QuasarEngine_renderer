@@ -13,20 +13,26 @@ namespace Quasar {
 		Application();
 		virtual ~Application();
 
+		Application(const Application&) = delete;
+		Application& operator=(const Application&) = delete;
+
 		void Run();
 
 		static constexpr int WIDTH = 800;
 		static constexpr int HEIGHT = 600;
 
 	private:
+		void CreatePipelineLayout();
+		void CreatePipeline();
+		void CreateCommandBuffers();
+		void DrawFrame();
+
 		Window window{ WIDTH, HEIGHT, "QuasarEngine" };
 		Device device{ window };
-		Pipeline pipeline{
-			device,
-			"",
-			"",
-			Pipeline::DefaultPipelineConfigInfo(WIDTH, HEIGHT)
-		};
+		SwapChain swapChain{ device, window.getExtent() };
+		std::unique_ptr<Pipeline> pipeline;
+		VkPipelineLayout pipelineLayout;
+		std::vector<VkCommandBuffer> commandBuffers;
 	};
 
 	// To be defined in Client
