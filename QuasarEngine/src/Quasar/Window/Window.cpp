@@ -22,4 +22,12 @@ namespace Quasar
 
 		window = glfwCreateWindow(width, height, windowName.c_str(), nullptr, nullptr);
 	}
+
+	void Window::CreateWindowSurface(VkInstance instance, VkSurfaceKHR* surface)
+	{
+		if (glfwCreateWindowSurface(instance, window, nullptr, surface) != VK_SUCCESS)
+		{
+			QS_CORE_ERROR("Failed to create Window Surface");
+		}
+	}
 }

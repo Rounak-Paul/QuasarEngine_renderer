@@ -1,8 +1,9 @@
 #pragma once
 
-#include "Quasar/Core.h"
+#include <Quasar/Core.h>
 
-#include "Quasar/Window/Window.h"
+#include "qspch.h"
+
 
 namespace Quasar {
 
@@ -12,10 +13,26 @@ namespace Quasar {
 		Application();
 		virtual ~Application();
 
+		Application(const Application&) = delete;
+		Application& operator=(const Application&) = delete;
+
 		void Run();
 
+		static constexpr int WIDTH = 800;
+		static constexpr int HEIGHT = 600;
+
 	private:
-		Window window{ 800, 600, "QuasarEngine" };
+		void CreatePipelineLayout();
+		void CreatePipeline();
+		void CreateCommandBuffers();
+		void DrawFrame();
+
+		Window window{ WIDTH, HEIGHT, "QuasarEngine" };
+		Device device{ window };
+		SwapChain swapChain{ device, window.getExtent() };
+		std::unique_ptr<Pipeline> pipeline;
+		VkPipelineLayout pipelineLayout;
+		std::vector<VkCommandBuffer> commandBuffers;
 	};
 
 	// To be defined in Client
