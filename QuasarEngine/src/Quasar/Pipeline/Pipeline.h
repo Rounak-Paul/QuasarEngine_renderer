@@ -1,7 +1,5 @@
 #pragma once
 
-#include <Quasar/Device/Device.h>
-
 namespace Quasar {
 
 	struct PipelineConfigInfo 

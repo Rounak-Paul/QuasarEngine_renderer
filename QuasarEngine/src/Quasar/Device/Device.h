@@ -1,8 +1,6 @@
 #pragma once
 #include "qspch.h"
 
-#include <Quasar/Window/Window.h>
-
 namespace Quasar {
 
 	struct SwapChainSupportDetails {

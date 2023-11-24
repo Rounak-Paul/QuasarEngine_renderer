@@ -22,10 +22,19 @@ namespace Quasar {
 		static constexpr int HEIGHT = 600;
 
 	private:
+		void LoadModels();
 		void CreatePipelineLayout();
 		void CreatePipeline();
 		void CreateCommandBuffers();
 		void DrawFrame();
+
+		void Sierpinski(
+			std::vector<Model::Vertex>& vertices,
+			int depth,
+			glm::vec2 left,
+			glm::vec2 right,
+			glm::vec2 top
+		);
 
 		Window window{ WIDTH, HEIGHT, "QuasarEngine" };
 		Device device{ window };
@@ -33,6 +42,7 @@ namespace Quasar {
 		std::unique_ptr<Pipeline> pipeline;
 		VkPipelineLayout pipelineLayout;
 		std::vector<VkCommandBuffer> commandBuffers;
+		std::unique_ptr<Model> model;
 	};
 
 	// To be defined in Client

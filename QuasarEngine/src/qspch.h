@@ -1,5 +1,8 @@
 #pragma once
 
+#define GLM_FORCE_RADIANS
+#define GLM_FORCE_DEPTH_ZERO_TO_ONE
+
 #include <iostream>
 #include <memory>
 #include <utility>
@@ -9,6 +12,7 @@
 #include <cstdlib>
 #include <limits>
 #include <stdexcept>
+#include <glm/glm.hpp>
 
 #include <string>
 #include <sstream>
@@ -24,6 +28,7 @@
 #include <Quasar/Device/Device.h>
 #include <Quasar/Pipeline/Pipeline.h>
 #include <Quasar/SwapChain/SwapChain.h>
+#include <Quasar/Model/Model.h>
 
 #ifdef QS_PLATFORM_WINDOWS
 	#include <Windows.h>
