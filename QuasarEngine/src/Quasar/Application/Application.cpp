@@ -49,8 +49,8 @@ namespace Quasar {
 		pipeline = std::make_unique<Pipeline>
 			(
 				device,
-				"D:/Code/QuasarEngine/QuasarEngine/Shader/simple_shader.vert.spv",
-				"D:/Code/QuasarEngine/QuasarEngine/Shader/simple_shader.frag.spv",
+				"D:/Code/QuasarEngine/QuasarEngine/Shader/bin/simple_shader.vert.spv",
+				"D:/Code/QuasarEngine/QuasarEngine/Shader/bin/simple_shader.frag.spv",
 				pipelineConfig
 			);
 	}

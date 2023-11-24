@@ -368,7 +368,7 @@ VkPresentModeKHR SwapChain::chooseSwapPresentMode(
     const std::vector<VkPresentModeKHR> &availablePresentModes) {
   for (const auto &availablePresentMode : availablePresentModes) {
     if (availablePresentMode == VK_PRESENT_MODE_MAILBOX_KHR) {
-      if (QS_DEBUG) QS_CORE_TRACE("Present mode: Mailbox");
+      QS_CORE_TRACE("Present mode: Mailbox");
       return availablePresentMode;
     }
   }
@@ -380,7 +380,7 @@ VkPresentModeKHR SwapChain::chooseSwapPresentMode(
   //   }
   // }
 
-  if (QS_DEBUG) QS_CORE_TRACE("Present mode: V-Sync");
+  QS_CORE_TRACE("Present mode: V-Sync");
   return VK_PRESENT_MODE_FIFO_KHR;
 }
 
