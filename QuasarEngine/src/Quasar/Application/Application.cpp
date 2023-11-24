@@ -30,7 +30,12 @@ namespace Quasar {
 	void Application::LoadModels()
 	{
 		std::vector<Model::Vertex> vertices{};
-		Sierpinski(vertices, 6, { -0.5f, 0.5f }, { 0.5f, 0.5f }, { 0.0f, -0.5f });
+		vertices = {
+			{{0.0f, -0.5f}, {1.0f, 0.0f, 0.0f}},
+			{{0.5f, 0.5f}, {0.0f, 1.0f, 0.0f}},
+			{{-0.5f, 0.5f}, {0.0f, 0.0f, 1.0f}},
+		};
+		//Sierpinski(vertices, 6, { -0.5f, 0.5f }, { 0.5f, 0.5f }, { 0.0f, -0.5f });
 		model = std::make_unique<Model>(device, vertices);
 	}
 
