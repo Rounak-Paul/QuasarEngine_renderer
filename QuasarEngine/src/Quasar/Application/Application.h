@@ -22,17 +22,30 @@ namespace Quasar {
 		static constexpr int HEIGHT = 600;
 
 	private:
+		void LoadModels();
 		void CreatePipelineLayout();
 		void CreatePipeline();
 		void CreateCommandBuffers();
+		void FreeCommandBuffers();
 		void DrawFrame();
+		void RecreateSwapChain();
+		void RecordCommandBuffer(int imageIndex);
+
+		void Sierpinski(
+			std::vector<Model::Vertex>& vertices,
+			int depth,
+			glm::vec2 left,
+			glm::vec2 right,
+			glm::vec2 top
+		);
 
 		Window window{ WIDTH, HEIGHT, "QuasarEngine" };
 		Device device{ window };
-		SwapChain swapChain{ device, window.getExtent() };
+		std::unique_ptr<SwapChain> swapChain;
 		std::unique_ptr<Pipeline> pipeline;
 		VkPipelineLayout pipelineLayout;
 		std::vector<VkCommandBuffer> commandBuffers;
+		std::unique_ptr<Model> model;
 	};
 
 	// To be defined in Client

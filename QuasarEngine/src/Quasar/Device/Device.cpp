@@ -111,7 +111,7 @@ namespace Quasar {
 		if (deviceCount == 0) {
 			QS_CORE_ERROR("failed to find GPUs with Vulkan support!");
 		}
-		if (QS_DEBUG) QS_CORE_TRACE("Device count: {0}", deviceCount);
+		QS_CORE_TRACE("Device count: {0}", deviceCount);
 		std::vector<VkPhysicalDevice> devices(deviceCount);
 		vkEnumeratePhysicalDevices(instance, &deviceCount, devices.data());
 
@@ -127,7 +127,7 @@ namespace Quasar {
 		}
 
 		vkGetPhysicalDeviceProperties(physicalDevice, &properties);
-		if (QS_DEBUG) QS_CORE_TRACE("Active Device: {0}", properties.deviceName);
+		QS_CORE_TRACE("Active Device: {0}", properties.deviceName);
 	}
 
 	void Device::createLogicalDevice() {
