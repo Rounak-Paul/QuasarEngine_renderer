@@ -213,6 +213,8 @@ namespace Quasar {
 
 		RecordCommandBuffer(imageIndex);
 		result = swapChain->submitCommandBuffers(&commandBuffers[imageIndex], &imageIndex);
+
+		// Resize window event
 		if (result == VK_ERROR_OUT_OF_DATE_KHR || result == VK_SUBOPTIMAL_KHR || window.WasWindowResized())
 		{
 			window.ResetWindowResizedFlag();
