@@ -22,7 +22,7 @@ namespace Quasar {
 		static constexpr int HEIGHT = 600;
 
 	private:
-		void LoadModels();
+		void LoadGameObjects();
 		void CreatePipelineLayout();
 		void CreatePipeline();
 		void CreateCommandBuffers();
@@ -30,6 +30,7 @@ namespace Quasar {
 		void DrawFrame();
 		void RecreateSwapChain();
 		void RecordCommandBuffer(int imageIndex);
+		void RenderGameObjects(VkCommandBuffer commandBuffer);
 
 		void Sierpinski(
 			std::vector<Model::Vertex>& vertices,
@@ -45,7 +46,7 @@ namespace Quasar {
 		std::unique_ptr<Pipeline> pipeline;
 		VkPipelineLayout pipelineLayout;
 		std::vector<VkCommandBuffer> commandBuffers;
-		std::unique_ptr<Model> model;
+		std::vector<GameObject> gameObjects;
 	};
 
 	// To be defined in Client

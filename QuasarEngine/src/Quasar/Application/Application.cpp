@@ -5,13 +5,14 @@ namespace Quasar {
 
 	struct SimplePushConstantData
 	{
+		glm::mat2 transform{1.0f};
 		glm::vec2 offset;
 		alignas(16) glm::vec3 color;
 	};
 
 	Application::Application() 
 	{
-		LoadModels();
+		LoadGameObjects();
 		CreatePipelineLayout();
 		RecreateSwapChain();
 		CreateCommandBuffers();
@@ -33,7 +34,7 @@ namespace Quasar {
 		}
 	}
 
-	void Application::LoadModels()
+	void Application::LoadGameObjects()
 	{
 		std::vector<Model::Vertex> vertices{};
 		vertices = {
@@ -42,7 +43,16 @@ namespace Quasar {
 			{{-0.5f, 0.5f}, {0.0f, 0.0f, 1.0f}},
 		};
 		//Sierpinski(vertices, 6, { -0.5f, 0.5f }, { 0.5f, 0.5f }, { 0.0f, -0.5f });
-		model = std::make_unique<Model>(device, vertices);
+		auto model = std::make_shared<Model>(device, vertices);
+
+		auto triangle = GameObject::CreateGameObject();
+		triangle.model = model;
+		triangle.color = { .1f, .8f, .1f };
+		triangle.transform2d.translation.x = .2f;
+		triangle.transform2d.scale = { 2.0f, .5f };
+		triangle.transform2d.rotation = .25 * glm::two_pi<float>();
+
+		gameObjects.push_back(std::move(triangle));
 	}
 
 	void Application::Sierpinski(
@@ -150,8 +160,6 @@ namespace Quasar {
 
 	void Application::RecordCommandBuffer(int imageIndex)
 	{
-		static int frame = 0;
-		frame = (frame + 1) % 1000;
 
 		VkCommandBufferBeginInfo beginInfo{};
 		beginInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
@@ -188,31 +196,38 @@ namespace Quasar {
 		vkCmdSetViewport(commandBuffers[imageIndex], 0, 1, &viewport);
 		vkCmdSetScissor(commandBuffers[imageIndex], 0, 1, &scissor);
 
-		pipeline->Bind(commandBuffers[imageIndex]);
-		model->Bind(commandBuffers[imageIndex]);
-		
+		RenderGameObjects(commandBuffers[imageIndex]);
 
-		for (int j = 0; j < 4; j++)
+		vkCmdEndRenderPass(commandBuffers[imageIndex]);
+		if (vkEndCommandBuffer(commandBuffers[imageIndex]) != VK_SUCCESS)
 		{
+			QS_CORE_ERROR("Failed to record command buffer!");
+		}
+	}
+
+	void Application::RenderGameObjects(VkCommandBuffer commandBuffer) 
+	{
+		pipeline->Bind(commandBuffer);
+
+		for (auto& obj : gameObjects)
+		{
+			obj.transform2d.rotation = glm::mod(obj.transform2d.rotation + .01f, glm::two_pi<float>());
+
 			SimplePushConstantData push{};
-			push.offset = { -0.5f * frame * 0.002f, -0.4f + j * 0.25f };
-			push.color = { 0.0f, 0.0f, 0.2f + 0.2f * j };
+			push.offset = obj.transform2d.translation;
+			push.color = obj.color;
+			push.transform = obj.transform2d.mat2();
 
 			vkCmdPushConstants(
-				commandBuffers[imageIndex],
+				commandBuffer,
 				pipelineLayout,
 				VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT,
 				0,
 				sizeof(SimplePushConstantData),
 				&push);
 
-			model->Draw(commandBuffers[imageIndex]);
-		}
-
-		vkCmdEndRenderPass(commandBuffers[imageIndex]);
-		if (vkEndCommandBuffer(commandBuffers[imageIndex]) != VK_SUCCESS)
-		{
-			QS_CORE_ERROR("Failed to record command buffer!");
+			obj.model->Bind(commandBuffer);
+			obj.model->Draw(commandBuffer);
 		}
 	}
 

@@ -13,6 +13,7 @@
 #include <limits>
 #include <stdexcept>
 #include <glm/glm.hpp>
+#include <glm/gtc/constants.hpp>
 
 #include <string>
 #include <sstream>
@@ -29,6 +30,7 @@
 #include <Quasar/Pipeline/Pipeline.h>
 #include <Quasar/SwapChain/SwapChain.h>
 #include <Quasar/Model/Model.h>
+#include <Quasar/GameObject/GameObject.h>
 
 #ifdef QS_PLATFORM_WINDOWS
 	#include <Windows.h>
