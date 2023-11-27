@@ -127,7 +127,7 @@ namespace Quasar {
 		}
 
 		vkGetPhysicalDeviceProperties(physicalDevice, &properties);
-		QS_CORE_TRACE("Active Device: {0}", properties.deviceName);
+		//QS_CORE_TRACE("Active Device: {0}", properties.deviceName);
 	}
 
 	void Device::createLogicalDevice() {

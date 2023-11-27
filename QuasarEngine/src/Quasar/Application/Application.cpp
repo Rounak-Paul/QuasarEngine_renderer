@@ -14,11 +14,10 @@ namespace Quasar {
 	{
 		LoadGameObjects();
 		CreatePipelineLayout();
-		RecreateSwapChain();
-		CreateCommandBuffers();
+		CreatePipeline();
 	}
 
-	Application::~Application() 
+	Application::~Application()
 	{
 		vkDestroyPipelineLayout(device.device(), pipelineLayout, nullptr);
 	}
@@ -28,7 +27,14 @@ namespace Quasar {
 		while (!window.ShouldClose())
 		{
 			glfwPollEvents();
-			DrawFrame();
+
+			if (auto commandBuffer = renderer.BeginFrame())
+			{
+				renderer.BeginSwapChainRenderPass(commandBuffer);
+				RenderGameObjects(commandBuffer);
+				renderer.EndSwapChainRenderPass(commandBuffer);
+				renderer.EndFrame();
+			}
 
 			vkDeviceWaitIdle(device.device());
 		}
@@ -55,28 +61,6 @@ namespace Quasar {
 		gameObjects.push_back(std::move(triangle));
 	}
 
-	void Application::Sierpinski(
-		std::vector<Model::Vertex>& vertices,
-		int depth,
-		glm::vec2 left,
-		glm::vec2 right,
-		glm::vec2 top)
-	{
-		if (depth <= 0) {
-			vertices.push_back({ top });
-			vertices.push_back({ right });
-			vertices.push_back({ left });
-		}
-		else {
-			auto leftTop = 0.5f * (left + top);
-			auto rightTop = 0.5f * (right + top);
-			auto leftRight = 0.5f * (left + right);
-			Sierpinski(vertices, depth - 1, left, leftRight, leftTop);
-			Sierpinski(vertices, depth - 1, leftRight, right, rightTop);
-			Sierpinski(vertices, depth - 1, leftTop, rightTop, top);
-		}
-	}
-
 	void Application::CreatePipelineLayout()
 	{
 		VkPushConstantRange pushConstantRange{};
@@ -98,12 +82,11 @@ namespace Quasar {
 	}
 	void Application::CreatePipeline()
 	{
-		assert(swapChain != nullptr && "Can not create pipeline before swap chain");
 		assert(pipelineLayout != nullptr && "Can not create pipeline before pipeline layout");
 
 		PipelineConfigInfo pipelineConfig{};
 		Pipeline::DefaultPipelineConfigInfo(pipelineConfig);
-		pipelineConfig.renderPass = swapChain->getRenderPass();
+		pipelineConfig.renderPass = renderer.GetSwapChainRenderPass();
 		pipelineConfig.pipelineLayout = pipelineLayout;
 		pipeline = std::make_unique<Pipeline>
 			(
@@ -113,99 +96,8 @@ namespace Quasar {
 				pipelineConfig
 			);
 	}
-	void Application::CreateCommandBuffers()
-	{
-		commandBuffers.resize(swapChain->imageCount());
 
-		VkCommandBufferAllocateInfo allocateInfo{};
-		allocateInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
-		allocateInfo.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
-		allocateInfo.commandPool = device.getCommandPool();
-		allocateInfo.commandBufferCount = static_cast<uint32_t>(commandBuffers.size());
-
-		if (vkAllocateCommandBuffers(device.device(), &allocateInfo, commandBuffers.data()) !=
-			VK_SUCCESS)
-		{
-			QS_CORE_ERROR("Failed to cllocate command buffers!");
-		}
-	}
-
-	void Application::RecreateSwapChain()
-	{
-		auto extent = window.GetExtent();
-		while (extent.width == 0 || extent.height == 0)
-		{
-			extent = window.GetExtent();
-			glfwWaitEvents();
-		}
-
-		vkDeviceWaitIdle(device.device());
-
-		if (swapChain == nullptr)
-		{
-			swapChain = std::make_unique<SwapChain>(device, extent);
-		}
-		else
-		{
-			swapChain = std::make_unique<SwapChain>(device, extent, std::move(swapChain));
-			if (swapChain->imageCount() != commandBuffers.size())
-			{
-				FreeCommandBuffers();
-				CreateCommandBuffers();
-			}
-		}
-
-		CreatePipeline();
-	}
-
-	void Application::RecordCommandBuffer(int imageIndex)
-	{
-
-		VkCommandBufferBeginInfo beginInfo{};
-		beginInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
-
-		if (vkBeginCommandBuffer(commandBuffers[imageIndex], &beginInfo) != VK_SUCCESS)
-		{
-			QS_CORE_ERROR("Failed to begin recording command buffer!");
-		}
-
-		VkRenderPassBeginInfo renderPassInfo{};
-		renderPassInfo.sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
-		renderPassInfo.renderPass = swapChain->getRenderPass();
-		renderPassInfo.framebuffer = swapChain->getFrameBuffer(imageIndex);
-
-		renderPassInfo.renderArea.offset = { 0, 0 };
-		renderPassInfo.renderArea.extent = swapChain->getSwapChainExtent();
-
-		std::array<VkClearValue, 2> clearValues{};
-		clearValues[0].color = { 0.01f, 0.01f, 0.01f, 1.0f };
-		clearValues[1].depthStencil = { 1.0f, 0 };
-		renderPassInfo.clearValueCount = static_cast<uint32_t>(clearValues.size());
-		renderPassInfo.pClearValues = clearValues.data();
-
-		vkCmdBeginRenderPass(commandBuffers[imageIndex], &renderPassInfo, VK_SUBPASS_CONTENTS_INLINE);
-
-		VkViewport viewport{};
-		viewport.x = 0.0f;
-		viewport.y = 0.0f;
-		viewport.width = static_cast<float>(swapChain->getSwapChainExtent().width);
-		viewport.height = static_cast<float>(swapChain->getSwapChainExtent().height);
-		viewport.minDepth = 0.0f;
-		viewport.maxDepth = 1.0f;
-		VkRect2D scissor{ {0, 0}, swapChain->getSwapChainExtent() };
-		vkCmdSetViewport(commandBuffers[imageIndex], 0, 1, &viewport);
-		vkCmdSetScissor(commandBuffers[imageIndex], 0, 1, &scissor);
-
-		RenderGameObjects(commandBuffers[imageIndex]);
-
-		vkCmdEndRenderPass(commandBuffers[imageIndex]);
-		if (vkEndCommandBuffer(commandBuffers[imageIndex]) != VK_SUCCESS)
-		{
-			QS_CORE_ERROR("Failed to record command buffer!");
-		}
-	}
-
-	void Application::RenderGameObjects(VkCommandBuffer commandBuffer) 
+	void Application::RenderGameObjects(VkCommandBuffer commandBuffer)
 	{
 		pipeline->Bind(commandBuffer);
 
@@ -228,48 +120,6 @@ namespace Quasar {
 
 			obj.model->Bind(commandBuffer);
 			obj.model->Draw(commandBuffer);
-		}
-	}
-
-	void Application::FreeCommandBuffers()
-	{
-		vkFreeCommandBuffers(
-			device.device(),
-			device.getCommandPool(),
-			static_cast<uint32_t>(commandBuffers.size()),
-			commandBuffers.data());
-		commandBuffers.clear();
-	}
-
-	void Application::DrawFrame()
-	{
-		uint32_t imageIndex;
-		auto result = swapChain->acquireNextImage(&imageIndex);
-
-		if (result == VK_ERROR_OUT_OF_DATE_KHR)
-		{
-			RecreateSwapChain();
-			return;
-		}
-
-		if (result != VK_SUCCESS && result != VK_SUBOPTIMAL_KHR)
-		{
-			QS_CORE_ERROR("Failed to acquire swap chain image!");
-		}
-
-		RecordCommandBuffer(imageIndex);
-		result = swapChain->submitCommandBuffers(&commandBuffers[imageIndex], &imageIndex);
-
-		// Resize window event
-		if (result == VK_ERROR_OUT_OF_DATE_KHR || result == VK_SUBOPTIMAL_KHR || window.WasWindowResized())
-		{
-			window.ResetWindowResizedFlag();
-			RecreateSwapChain();
-			return;
-		}
-		if (result != VK_SUCCESS)
-		{
-			QS_CORE_ERROR("Failed to present swap chain image!");
 		}
 	}
 

@@ -1,6 +1,5 @@
-#include "SwapChain.h"
-
 #include "qspch.h"
+#include "SwapChain.h"
 
 namespace Quasar {
 

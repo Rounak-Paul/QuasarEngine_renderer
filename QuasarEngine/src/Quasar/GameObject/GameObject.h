@@ -1,4 +1,5 @@
 #pragma once
+#include <Quasar/Model/Model.h>
 
 namespace Quasar
 {

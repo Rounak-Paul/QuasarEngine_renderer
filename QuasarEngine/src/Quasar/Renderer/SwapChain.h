@@ -1,6 +1,7 @@
 #pragma once
 
 #include "qspch.h"
+#include "Device.h"
 
 namespace Quasar {
 
