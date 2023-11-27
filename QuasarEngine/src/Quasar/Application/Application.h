@@ -1,9 +1,11 @@
 #pragma once
+#include "qspch.h"
 
 #include <Quasar/Core.h>
 
-#include "qspch.h"
-
+#include <Quasar/Model/Model.h>
+#include <Quasar/RenderSystem/RenderSystem.h>
+#include <Quasar/GameObject/GameObject.h>
 
 namespace Quasar {
 
@@ -22,30 +24,15 @@ namespace Quasar {
 		static constexpr int HEIGHT = 600;
 
 	private:
-		void LoadModels();
-		void CreatePipelineLayout();
-		void CreatePipeline();
-		void CreateCommandBuffers();
-		void FreeCommandBuffers();
-		void DrawFrame();
-		void RecreateSwapChain();
-		void RecordCommandBuffer(int imageIndex);
+		void LoadGameObjects();
 
-		void Sierpinski(
-			std::vector<Model::Vertex>& vertices,
-			int depth,
-			glm::vec2 left,
-			glm::vec2 right,
-			glm::vec2 top
-		);
+		void FPS(int& frames, std::chrono::time_point<std::chrono::high_resolution_clock>& startTime);
 
 		Window window{ WIDTH, HEIGHT, "QuasarEngine" };
 		Device device{ window };
-		std::unique_ptr<SwapChain> swapChain;
-		std::unique_ptr<Pipeline> pipeline;
-		VkPipelineLayout pipelineLayout;
-		std::vector<VkCommandBuffer> commandBuffers;
-		std::unique_ptr<Model> model;
+		Renderer renderer{ window, device };
+
+		std::vector<GameObject> gameObjects;
 	};
 
 	// To be defined in Client

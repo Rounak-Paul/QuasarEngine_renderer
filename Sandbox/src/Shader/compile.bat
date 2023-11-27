@@ -3,9 +3,11 @@ setlocal enabledelayedexpansion
 
 echo Building shaders...
 
-set input_dir=Shader\Code
-set output_dir=Shader\bin
+set input_dir=src\Shader\Code
+set output_dir=%2
 set vulkanSDKPath=%1
+
+mkdir "!output_dir!"
 
 if "%vulkanSDKPath%"=="" (
     echo VULKAN_SDK path not provided. Please provide it as an argument.
