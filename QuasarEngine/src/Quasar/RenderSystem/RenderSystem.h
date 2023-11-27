@@ -6,10 +6,9 @@
 #include <Quasar/Model/Model.h>
 #include "Device.h"
 #include "Pipeline.h"
-#include "Window.h"
+#include <Quasar/Window/Window.h>
 #include "Renderer.h"
 #include "SwapChain.h"
-#include "Window.h"
 #include <Quasar/GameObject/GameObject.h>
 
 namespace Quasar {

@@ -1,6 +1,6 @@
 #pragma once
 #include "qspch.h"
-#include "Window.h"
+#include <Quasar/Window/Window.h>
 
 namespace Quasar {
 
