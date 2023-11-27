@@ -1,17 +1,31 @@
-#include "SwapChain.h"
-
 #include "qspch.h"
+#include "SwapChain.h"
 
 namespace Quasar {
 
 SwapChain::SwapChain(Device &deviceRef, VkExtent2D extent)
-    : device{deviceRef}, windowExtent{extent} {
-  createSwapChain();
-  createImageViews();
-  createRenderPass();
-  createDepthResources();
-  createFramebuffers();
-  createSyncObjects();
+    : device{deviceRef}, windowExtent{extent} 
+{
+	Init();
+}
+
+SwapChain::SwapChain(Device &deviceRef, VkExtent2D extent, std::shared_ptr<SwapChain> previous)
+    : device{deviceRef}, windowExtent{extent}, oldSwapChain{previous}
+{
+	Init();
+
+	oldSwapChain = nullptr;
+
+}
+
+void SwapChain::Init()
+{
+	createSwapChain();
+	createImageViews();
+	createRenderPass();
+	createDepthResources();
+	createFramebuffers();
+	createSyncObjects();
 }
 
 SwapChain::~SwapChain() {
@@ -155,16 +169,11 @@ void SwapChain::createSwapChain() {
   createInfo.presentMode = presentMode;
   createInfo.clipped = VK_TRUE;
 
-  createInfo.oldSwapchain = VK_NULL_HANDLE;
+  createInfo.oldSwapchain = oldSwapChain == nullptr ? VK_NULL_HANDLE : oldSwapChain->swapChain;
 
   if (vkCreateSwapchainKHR(device.device(), &createInfo, nullptr, &swapChain) != VK_SUCCESS) {
     throw std::runtime_error("failed to create swap chain!");
   }
-
-  // we only specified a minimum number of images in the swap chain, so the implementation is
-  // allowed to create a swap chain with more. That's why we'll first query the final number of
-  // images with vkGetSwapchainImagesKHR, then resize the container and finally call it again to
-  // retrieve the handles.
   vkGetSwapchainImagesKHR(device.device(), swapChain, &imageCount, nullptr);
   swapChainImages.resize(imageCount);
   vkGetSwapchainImagesKHR(device.device(), swapChain, &imageCount, swapChainImages.data());
@@ -282,6 +291,7 @@ void SwapChain::createFramebuffers() {
 
 void SwapChain::createDepthResources() {
   VkFormat depthFormat = findDepthFormat();
+  swapChainDepthFormat = depthFormat;
   VkExtent2D swapChainExtent = getSwapChainExtent();
 
   depthImages.resize(imageCount());
@@ -355,7 +365,7 @@ void SwapChain::createSyncObjects() {
 VkSurfaceFormatKHR SwapChain::chooseSwapSurfaceFormat(
     const std::vector<VkSurfaceFormatKHR> &availableFormats) {
   for (const auto &availableFormat : availableFormats) {
-    if (availableFormat.format == VK_FORMAT_B8G8R8A8_UNORM &&
+    if (availableFormat.format == VK_FORMAT_B8G8R8A8_SRGB &&
         availableFormat.colorSpace == VK_COLOR_SPACE_SRGB_NONLINEAR_KHR) {
       return availableFormat;
     }
@@ -364,14 +374,14 @@ VkSurfaceFormatKHR SwapChain::chooseSwapSurfaceFormat(
   return availableFormats[0];
 }
 
-VkPresentModeKHR SwapChain::chooseSwapPresentMode(
-    const std::vector<VkPresentModeKHR> &availablePresentModes) {
-  for (const auto &availablePresentMode : availablePresentModes) {
-    if (availablePresentMode == VK_PRESENT_MODE_MAILBOX_KHR) {
-      if (QS_DEBUG) QS_CORE_TRACE("Present mode: Mailbox");
-      return availablePresentMode;
-    }
-  }
+VkPresentModeKHR SwapChain::chooseSwapPresentMode(const std::vector<VkPresentModeKHR> &availablePresentModes) 
+{
+	for (const auto &availablePresentMode : availablePresentModes) {
+		if (availablePresentMode == VK_PRESENT_MODE_MAILBOX_KHR) {
+			QS_CORE_TRACE("Present mode: Mailbox");
+			return availablePresentMode;
+		}
+	}
 
   // for (const auto &availablePresentMode : availablePresentModes) {
   //   if (availablePresentMode == VK_PRESENT_MODE_IMMEDIATE_KHR) {
@@ -380,7 +390,7 @@ VkPresentModeKHR SwapChain::chooseSwapPresentMode(
   //   }
   // }
 
-  if (QS_DEBUG) QS_CORE_TRACE("Present mode: V-Sync");
+  QS_CORE_TRACE("Present mode: V-Sync");
   return VK_PRESENT_MODE_FIFO_KHR;
 }
 

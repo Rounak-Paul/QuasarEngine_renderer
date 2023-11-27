@@ -1,6 +1,5 @@
 #pragma once
 #include "qspch.h"
-
 #include <Quasar/Window/Window.h>
 
 namespace Quasar {
@@ -32,7 +31,7 @@ namespace Quasar {
 
 		// Not copyable or movable
 		Device(const Device&) = delete;
-		void operator=(const Device&) = delete;
+		Device& operator=(const Device&) = delete;
 		Device(Device&&) = delete;
 		Device& operator=(Device&&) = delete;
 
