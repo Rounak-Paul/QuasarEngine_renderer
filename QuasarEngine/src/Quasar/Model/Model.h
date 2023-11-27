@@ -1,6 +1,6 @@
 #pragma once
 #include "qspch.h"
-#include <Quasar/Renderer/Device.h>
+#include <Quasar/RenderSystem/Device.h>
 
 namespace Quasar 
 {

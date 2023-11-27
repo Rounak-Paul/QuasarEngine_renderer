@@ -2,7 +2,7 @@
 -- Quasar Dependencies
 
 VULKAN_SDK = os.getenv("VULKAN_SDK")
-SHADER_COMPILER_SCRIPT = "%{wks.location}/QuasarEngine/Shader/compile.bat"
+SHADER_COMPILER_SCRIPT = "%{wks.location}Sandbox/src/Shader/compile.bat"
 
 IncludeDir = {}
 IncludeDir["glm"] = "%{wks.location}/QuasarEngine/vendor/glm"

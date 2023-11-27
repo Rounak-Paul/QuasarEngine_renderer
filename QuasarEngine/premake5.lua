@@ -46,11 +46,6 @@ project "QuasarEngine"
 		"%{LibraryDir.GLFWSDK}",
 	}
 
-	prebuildcommands 
-	{
-        (SHADER_COMPILER_SCRIPT .. " " .. VULKAN_SDK)
-    }
-
 	postbuildcommands
 	{
 		("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")

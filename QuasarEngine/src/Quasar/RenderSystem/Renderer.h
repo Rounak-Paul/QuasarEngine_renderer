@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Quasar/Window/Window.h>
+#include "Window.h"
 #include "Device.h"
 #include "SwapChain.h"
 
@@ -22,7 +22,13 @@ namespace Quasar
 		VkCommandBuffer GetCurrentCommandBuffer() const 
 		{ 
 			assert(isFrameStarted && "Can not get command buffer when frame is not in progress!");
-			return commandBuffers[currentImageIndex]; 
+			return commandBuffers[currentFrameIndex];
+		}
+
+		int GetFrameIndex()
+		{
+			assert(isFrameStarted && "Can not get frame index when frame is not in progress!");
+			return currentFrameIndex;
 		}
 
 		VkCommandBuffer BeginFrame();
@@ -40,7 +46,8 @@ namespace Quasar
 		std::unique_ptr<SwapChain> swapChain;
 		std::vector<VkCommandBuffer> commandBuffers;
 
-		uint32_t currentImageIndex{0};
+		uint32_t currentImageIndex;
+		int currentFrameIndex{ 0 };
 		bool isFrameStarted{false};
 	};
 }

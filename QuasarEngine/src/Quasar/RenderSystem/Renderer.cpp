@@ -16,7 +16,7 @@ namespace Quasar
 
 	void Renderer::CreateCommandBuffers()
 	{
-		commandBuffers.resize(swapChain->imageCount());
+		commandBuffers.resize(SwapChain::MAX_FRAMES_IN_FLIGHT);
 
 		VkCommandBufferAllocateInfo allocateInfo{};
 		allocateInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
@@ -48,20 +48,17 @@ namespace Quasar
 		}
 		else
 		{
-			swapChain = std::make_unique<SwapChain>(_device, extent, std::move(swapChain));
-			if (swapChain->imageCount() != commandBuffers.size())
+			std::shared_ptr<SwapChain> oldSwapChain = std::move(swapChain);
+			swapChain = std::make_unique<SwapChain>(_device, extent, oldSwapChain);
+
+			if (!oldSwapChain->CompareSwapFormats(*swapChain.get()))
 			{
-				FreeCommandBuffers();
-				CreateCommandBuffers();
+				QS_CORE_ERROR("Swap chain image (or depth) format has changed");
 			}
 		}
 
 		//
 	}
-
-	
-
-	
 
 	void Renderer::FreeCommandBuffers()
 	{
@@ -120,12 +117,13 @@ namespace Quasar
 			_window.ResetWindowResizedFlag();
 			RecreateSwapChain();
 		}
-		if (result != VK_SUCCESS)
+		else if (result != VK_SUCCESS)
 		{
 			QS_CORE_ERROR("Failed to present swap chain image!");
 		}
 
 		isFrameStarted = false;
+		currentFrameIndex = (currentFrameIndex + 1) % SwapChain::MAX_FRAMES_IN_FLIGHT;
 	}
 
 	void Renderer::BeginSwapChainRenderPass(VkCommandBuffer commandBuffer)

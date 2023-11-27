@@ -1,16 +1,11 @@
 #pragma once
+#include "qspch.h"
 
 #include <Quasar/Core.h>
 
 #include <Quasar/Model/Model.h>
-#include <Quasar/Window/Window.h>
-#include <Quasar/Renderer/Device.h>
-#include <Quasar/Renderer/Pipeline.h>
-#include <Quasar/Renderer/Renderer.h>
+#include <Quasar/RenderSystem/RenderSystem.h>
 #include <Quasar/GameObject/GameObject.h>
-
-#include "qspch.h"
-
 
 namespace Quasar {
 
@@ -30,16 +25,13 @@ namespace Quasar {
 
 	private:
 		void LoadGameObjects();
-		void CreatePipelineLayout();
-		void CreatePipeline();
-		void RenderGameObjects(VkCommandBuffer commandBuffer);
+
+		void FPS(int& frames, std::chrono::time_point<std::chrono::high_resolution_clock>& startTime);
 
 		Window window{ WIDTH, HEIGHT, "QuasarEngine" };
 		Device device{ window };
 		Renderer renderer{ window, device };
 
-		std::unique_ptr<Pipeline> pipeline;
-		VkPipelineLayout pipelineLayout;
 		std::vector<GameObject> gameObjects;
 	};
 
