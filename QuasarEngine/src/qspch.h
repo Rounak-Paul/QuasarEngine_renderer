@@ -13,6 +13,7 @@
 #include <utility>
 #include <algorithm>
 #include <functional>
+#include <filesystem>
 #include <cassert>
 #include <cstdlib>
 #include <limits>

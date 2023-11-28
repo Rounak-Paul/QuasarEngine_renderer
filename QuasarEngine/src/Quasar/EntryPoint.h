@@ -10,8 +10,6 @@ extern Quasar::Application* Quasar::CreateApplication();
 void init() {
 	Quasar::Log::Init();
 	QS_CORE_INFO("Initiating Quasar Engine...");
-
-	Quasar::Event::Init();
 }
 
 int main(int argc, char** argv)

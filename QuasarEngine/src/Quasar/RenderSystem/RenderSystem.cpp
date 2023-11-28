@@ -1,6 +1,14 @@
 #include "qspch.h"
 #include "RenderSystem.h"
 
+#ifdef QS_DEBUG
+	#define QS_SHADER_VERT_PATH "D:/Code/QuasarEngine/bin/Debug-windows-x86_64/Sandbox/Shader/simple_shader.vert.spv"
+	#define QS_SHADER_FRAG_PATH "D:/Code/QuasarEngine/bin/Debug-windows-x86_64/Sandbox/Shader/simple_shader.frag.spv"
+#else
+	#define QS_SHADER_VERT_PATH "Shader/simple_shader.vert.spv"
+	#define QS_SHADER_FRAG_PATH "Shader/simple_shader.frag.spv"
+#endif
+
 namespace Quasar {
 
 	struct SimplePushConstantData
@@ -39,6 +47,7 @@ namespace Quasar {
 			QS_CORE_ERROR("Failed to create pipeline layout");
 		}
 	}
+
 	void RenderSystem::CreatePipeline(VkRenderPass renderPass)
 	{
 		assert(pipelineLayout != nullptr && "Can not create pipeline before pipeline layout");
@@ -47,11 +56,12 @@ namespace Quasar {
 		Pipeline::DefaultPipelineConfigInfo(pipelineConfig);
 		pipelineConfig.renderPass = renderPass;
 		pipelineConfig.pipelineLayout = pipelineLayout;
+
 		pipeline = std::make_unique<Pipeline>
 			(
 				_device,
-				"D:/Code/QuasarEngine/bin/Debug-windows-x86_64/Sandbox/Shader/simple_shader.vert.spv",
-				"D:/Code/QuasarEngine/bin/Debug-windows-x86_64/Sandbox/Shader/simple_shader.frag.spv",
+				QS_SHADER_VERT_PATH,
+				QS_SHADER_FRAG_PATH,
 				pipelineConfig
 			);
 	}
