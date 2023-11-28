@@ -33,6 +33,9 @@
 #include <set>
 
 #include <Quasar/Log/Log.h>
+#include <Quasar/EventSystem/Event.h>
+#include <Quasar/Camera/Camera.h>
+#include <Quasar/GameObject/GameObject.h>
 
 
 #ifdef QS_PLATFORM_WINDOWS

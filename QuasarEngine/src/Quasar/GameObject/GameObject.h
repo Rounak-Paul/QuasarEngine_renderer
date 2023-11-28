@@ -5,7 +5,7 @@ namespace Quasar
 {
 	struct TransformComponent
 	{
-		glm::vec3 translation{};
+		glm::vec3 translate{};
 		glm::vec3 scale{ 1.0f, 1.0f, 1.0f };
 		glm::vec3 rotation{};
 
@@ -48,7 +48,7 @@ namespace Quasar
 					scale.z * (c1 * c2),
 					0.0f,
 				},
-				{translation.x, translation.y, translation.z, 1.0f} 
+				{translate.x, translate.y, translate.z, 1.0f}
 			};
 		}
 	};

@@ -18,6 +18,7 @@ namespace Quasar
 		Renderer& operator=(const Renderer&) = delete;
 
 		VkRenderPass GetSwapChainRenderPass() const { return swapChain->getRenderPass(); }
+		float GetAspectRatio() const { return swapChain->extentAspectRatio(); }
 		bool IsFrameInProgress() const { return isFrameStarted; }
 		VkCommandBuffer GetCurrentCommandBuffer() const 
 		{ 

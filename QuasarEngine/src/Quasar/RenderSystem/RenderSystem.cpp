@@ -56,7 +56,7 @@ namespace Quasar {
 			);
 	}
 
-	void RenderSystem::RenderGameObjects(VkCommandBuffer commandBuffer, std::vector<GameObject>& gameObjects)
+	void RenderSystem::RenderGameObjects(VkCommandBuffer commandBuffer, std::vector<GameObject>& gameObjects, const Camera& camera)
 	{
 		pipeline->Bind(commandBuffer);
 
@@ -67,7 +67,7 @@ namespace Quasar {
 
 			SimplePushConstantData push{};
 			push.color = obj.color;
-			push.transform = obj.transform.mat4();
+			push.transform = camera.GetProjection() * obj.transform.mat4();
 
 			vkCmdPushConstants(
 				commandBuffer,
