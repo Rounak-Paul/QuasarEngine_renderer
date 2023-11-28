@@ -14,7 +14,8 @@ namespace Quasar {
 	{
 		RenderSystem renderSystem{device, renderer.GetSwapChainRenderPass()};
 		Camera camera{};
-		
+		//camera.SetViewDirection(glm::vec3{ 0.f }, glm::vec3{ .5f, .0f, 1.f });
+		camera.SetViewTarget(glm::vec3{ -1.f, -2.f, 2.f }, glm::vec3{ 0.0f, 0.0f, 2.5f });
 
 		// Initialize variables for FPS calculation
 		auto startTime = std::chrono::high_resolution_clock::now();

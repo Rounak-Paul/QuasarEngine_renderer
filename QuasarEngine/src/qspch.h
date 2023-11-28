@@ -33,7 +33,7 @@
 #include <set>
 
 #include <Quasar/Log/Log.h>
-#include <Quasar/EventSystem/Event.h>
+#include <Quasar/EventSystem/EventSystem.h>
 #include <Quasar/Camera/Camera.h>
 #include <Quasar/GameObject/GameObject.h>
 
