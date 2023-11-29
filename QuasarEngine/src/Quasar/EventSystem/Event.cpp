@@ -5,7 +5,7 @@ namespace Quasar
 {
 	Event::Event(uint8_t priority) : _priority{ priority }
 	{
-		QS_CORE_INFO("Event created with priority: {0}", _priority);
+		QS_CORE_TRACE("Event created with priority: {0}", _priority);
 	}
 
 	Event::~Event()

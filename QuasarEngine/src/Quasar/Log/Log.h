@@ -22,27 +22,21 @@ namespace Quasar {
 }
 
 #define QS_CORE_ERROR(...)	::Quasar::Log::GetCoreLogger()->error(__VA_ARGS__)
-
-#define QS_ERROR(...)	::Quasar::Log::GetClientLogger()->error(__VA_ARGS__)
-
-#ifdef QS_DEBUG
-
 #define QS_CORE_WARN(...)	::Quasar::Log::GetCoreLogger()->warn(__VA_ARGS__)
 #define QS_CORE_INFO(...)	::Quasar::Log::GetCoreLogger()->info(__VA_ARGS__)
-#define QS_CORE_TRACE(...)	::Quasar::Log::GetCoreLogger()->trace(__VA_ARGS__)
 
+#define QS_ERROR(...)	::Quasar::Log::GetClientLogger()->error(__VA_ARGS__)
 #define QS_WARN(...)	::Quasar::Log::GetClientLogger()->warn(__VA_ARGS__)
 #define QS_INFO(...)	::Quasar::Log::GetClientLogger()->info(__VA_ARGS__)
+
+#ifdef QS_DEBUG
+#define QS_CORE_TRACE(...)	::Quasar::Log::GetCoreLogger()->trace(__VA_ARGS__)
+
 #define QS_TRACE(...)	::Quasar::Log::GetClientLogger()->trace(__VA_ARGS__)
 
 #else
-
-#define QS_CORE_WARN(...)
-#define QS_CORE_INFO(...)
 #define QS_CORE_TRACE(...)
 
-#define QS_WARN(...)
-#define QS_INFO(...)
 #define QS_TRACE(...)
 
 #endif
