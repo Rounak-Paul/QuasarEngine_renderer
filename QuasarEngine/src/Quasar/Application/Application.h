@@ -9,6 +9,14 @@
 
 namespace Quasar {
 
+	/// <summary>
+	///		<para>
+	///			Quasar Application
+	///		</para>
+	///		<para>
+	///			Main application to instantiate Quasae Engine. Performs main application loop. 
+	///		</para>
+	/// </summary>
 	class QUASAR_API Application
 	{
 	public:

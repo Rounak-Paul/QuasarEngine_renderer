@@ -34,6 +34,7 @@ namespace Quasar {
 				renderer.BeginSwapChainRenderPass(commandBuffer);
 				renderSystem.RenderGameObjects(commandBuffer, gameObjects, camera);
 				renderer.EndSwapChainRenderPass(commandBuffer);
+
 				renderer.EndFrame();
 			}
 
