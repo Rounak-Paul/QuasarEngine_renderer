@@ -13,6 +13,9 @@ namespace Quasar {
 	void Application::Run()
 	{
 		RenderSystem renderSystem{device, renderer.GetSwapChainRenderPass()};
+		Camera camera{};
+		//camera.SetViewDirection(glm::vec3{ 0.f }, glm::vec3{ .5f, .0f, 1.f });
+		camera.SetViewTarget(glm::vec3{ -1.f, -2.f, 2.f }, glm::vec3{ 0.0f, 0.0f, 2.5f });
 
 		// Initialize variables for FPS calculation
 		auto startTime = std::chrono::high_resolution_clock::now();
@@ -22,11 +25,16 @@ namespace Quasar {
 		{
 			glfwPollEvents();
 
+			float aspect = renderer.GetAspectRatio();
+			//camera.SetOrthographicsProjection(-aspect, aspect, -1, 1, -1, 1);
+			camera.SetPerspectiveProjection(glm::radians(50.0f), aspect, 0.1f, 10.0f);
+
 			if (auto commandBuffer = renderer.BeginFrame())
 			{
 				renderer.BeginSwapChainRenderPass(commandBuffer);
-				renderSystem.RenderGameObjects(commandBuffer, gameObjects);
+				renderSystem.RenderGameObjects(commandBuffer, gameObjects, camera);
 				renderer.EndSwapChainRenderPass(commandBuffer);
+
 				renderer.EndFrame();
 			}
 
@@ -100,7 +108,7 @@ namespace Quasar {
 		std::shared_ptr<Model> model = createCubeModel(device, { .0f, .0f, .0f });
 		auto cube = GameObject::CreateGameObject();
 		cube.model = model;
-		cube.transform.translation = { 0.0f, 0.0f, 0.5f };
+		cube.transform.translate = { 0.0f, 0.0f, 2.5f };
 		cube.transform.scale = { 0.5f, 0.5f, 0.5f };
 
 		gameObjects.push_back(std::move(cube));

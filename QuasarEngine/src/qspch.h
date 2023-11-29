@@ -13,6 +13,7 @@
 #include <utility>
 #include <algorithm>
 #include <functional>
+#include <filesystem>
 #include <cassert>
 #include <cstdlib>
 #include <limits>
@@ -33,6 +34,8 @@
 #include <set>
 
 #include <Quasar/Log/Log.h>
+#include <Quasar/Camera/Camera.h>
+#include <Quasar/GameObject/GameObject.h>
 
 
 #ifdef QS_PLATFORM_WINDOWS
