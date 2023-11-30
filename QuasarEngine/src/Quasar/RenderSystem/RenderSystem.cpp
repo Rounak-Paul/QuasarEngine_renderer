@@ -2,8 +2,8 @@
 #include "RenderSystem.h"
 
 #ifdef QS_DEBUG
-	#define QS_SHADER_VERT_PATH "D:/Code/QuasarEngine/bin/Debug-windows-x86_64/Sandbox/Shader/simple_shader.vert.spv"
-	#define QS_SHADER_FRAG_PATH "D:/Code/QuasarEngine/bin/Debug-windows-x86_64/Sandbox/Shader/simple_shader.frag.spv"
+	#define QS_SHADER_VERT_PATH "D:/CODE/Engine-Template/bin/Debug-windows-x86_64/Sandbox/Shader/simple_shader.vert.spv"
+	#define QS_SHADER_FRAG_PATH "D:/CODE/Engine-Template/bin/Debug-windows-x86_64/Sandbox/Shader/simple_shader.frag.spv"
 #else
 	#define QS_SHADER_VERT_PATH "Shader/simple_shader.vert.spv"
 	#define QS_SHADER_FRAG_PATH "Shader/simple_shader.frag.spv"
