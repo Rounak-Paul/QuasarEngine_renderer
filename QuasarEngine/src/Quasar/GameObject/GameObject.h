@@ -1,4 +1,9 @@
 #pragma once
+
+#define CAMERA_SPACE 0
+#define SCREEN_SPACE 1
+#define WORLD_SPACE 2
+
 #include <Quasar/Model/Model.h>
 
 namespace Quasar
@@ -74,6 +79,8 @@ namespace Quasar
 		std::shared_ptr<Model> model{};
 		glm::vec3 color{};
 		TransformComponent transform{};
+
+		int space = CAMERA_SPACE;
 
 	private:
 		GameObject(id_t objId) : id{objId} {}
