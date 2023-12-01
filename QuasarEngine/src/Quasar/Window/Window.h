@@ -18,6 +18,7 @@ namespace Quasar
 		
 		bool WasWindowResized() { return framebufferResized; }
 		void ResetWindowResizedFlag() { framebufferResized = false; }
+		GLFWwindow* GetGLFWwindow() const { return window; }
 
 		void CreateWindowSurface(VkInstance instance, VkSurfaceKHR *surface);
 

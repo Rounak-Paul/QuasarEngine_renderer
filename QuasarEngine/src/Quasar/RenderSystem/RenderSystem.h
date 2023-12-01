@@ -22,7 +22,7 @@ namespace Quasar {
 		RenderSystem(const RenderSystem&) = delete;
 		RenderSystem& operator=(const RenderSystem&) = delete;
 
-		void RenderGameObjects(VkCommandBuffer commandBuffer, std::vector<GameObject>& gameObjects);
+		void RenderGameObjects(VkCommandBuffer commandBuffer, std::vector<GameObject>& gameObjects, const Camera& camera);
 	private:
 		void CreatePipelineLayout();
 		void CreatePipeline(VkRenderPass renderPass);

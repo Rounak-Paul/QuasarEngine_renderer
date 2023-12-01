@@ -1,6 +1,14 @@
 #include "qspch.h"
 #include "RenderSystem.h"
 
+#ifdef QS_DEBUG
+	#define QS_SHADER_VERT_PATH "D:/CODE/QuasarEngine/bin/Debug-windows-x86_64/Sandbox/Shader/simple_shader.vert.spv"
+	#define QS_SHADER_FRAG_PATH "D:/CODE/QuasarEngine/bin/Debug-windows-x86_64/Sandbox/Shader/simple_shader.frag.spv"
+#else
+	#define QS_SHADER_VERT_PATH "Shader/simple_shader.vert.spv"
+	#define QS_SHADER_FRAG_PATH "Shader/simple_shader.frag.spv"
+#endif
+
 namespace Quasar {
 
 	struct SimplePushConstantData
@@ -39,6 +47,7 @@ namespace Quasar {
 			QS_CORE_ERROR("Failed to create pipeline layout");
 		}
 	}
+
 	void RenderSystem::CreatePipeline(VkRenderPass renderPass)
 	{
 		assert(pipelineLayout != nullptr && "Can not create pipeline before pipeline layout");
@@ -47,28 +56,34 @@ namespace Quasar {
 		Pipeline::DefaultPipelineConfigInfo(pipelineConfig);
 		pipelineConfig.renderPass = renderPass;
 		pipelineConfig.pipelineLayout = pipelineLayout;
+
 		pipeline = std::make_unique<Pipeline>
 			(
 				_device,
-				"D:/Code/QuasarEngine/bin/Debug-windows-x86_64/Sandbox/Shader/simple_shader.vert.spv",
-				"D:/Code/QuasarEngine/bin/Debug-windows-x86_64/Sandbox/Shader/simple_shader.frag.spv",
+				QS_SHADER_VERT_PATH,
+				QS_SHADER_FRAG_PATH,
 				pipelineConfig
 			);
 	}
 
-	void RenderSystem::RenderGameObjects(VkCommandBuffer commandBuffer, std::vector<GameObject>& gameObjects)
+	void RenderSystem::RenderGameObjects(VkCommandBuffer commandBuffer, std::vector<GameObject>& gameObjects, const Camera& camera)
 	{
 		pipeline->Bind(commandBuffer);
 
+		auto projectionView = camera.GetProjection() * camera.GetView();
+
 		for (auto& obj : gameObjects)
 		{
-			obj.transform.rotation.y = glm::mod(obj.transform.rotation.y + .01f, glm::two_pi<float>());
-			obj.transform.rotation.x = glm::mod(obj.transform.rotation.x + .005f, glm::two_pi<float>());
-
 			SimplePushConstantData push{};
 			push.color = obj.color;
-			push.transform = obj.transform.mat4();
-
+			if (obj.space == CAMERA_SPACE) 
+			{
+				push.transform = projectionView * obj.transform.mat4();
+			}
+			if (obj.space == SCREEN_SPACE)
+			{
+				push.transform = camera.GetProjection() * obj.transform.mat4();
+			}
 			vkCmdPushConstants(
 				commandBuffer,
 				pipelineLayout,

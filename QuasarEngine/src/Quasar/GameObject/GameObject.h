@@ -1,11 +1,16 @@
 #pragma once
+
+#define CAMERA_SPACE 0
+#define SCREEN_SPACE 1
+#define WORLD_SPACE 2
+
 #include <Quasar/Model/Model.h>
 
 namespace Quasar
 {
 	struct TransformComponent
 	{
-		glm::vec3 translation{};
+		glm::vec3 translate{};
 		glm::vec3 scale{ 1.0f, 1.0f, 1.0f };
 		glm::vec3 rotation{};
 
@@ -48,7 +53,7 @@ namespace Quasar
 					scale.z * (c1 * c2),
 					0.0f,
 				},
-				{translation.x, translation.y, translation.z, 1.0f} 
+				{translate.x, translate.y, translate.z, 1.0f}
 			};
 		}
 	};
@@ -74,6 +79,8 @@ namespace Quasar
 		std::shared_ptr<Model> model{};
 		glm::vec3 color{};
 		TransformComponent transform{};
+
+		int space = CAMERA_SPACE;
 
 	private:
 		GameObject(id_t objId) : id{objId} {}
