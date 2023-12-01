@@ -14,7 +14,7 @@ namespace Quasar {
 	struct SimplePushConstantData
 	{
 		glm::mat4 transform{ 1.0f };
-		alignas(16) glm::vec3 color;
+		glm::mat4 normalMatrix{ 1.0f };
 	};
 
 	RenderSystem::RenderSystem(Device& device, VkRenderPass renderPass) : _device(device)
@@ -75,15 +75,16 @@ namespace Quasar {
 		for (auto& obj : gameObjects)
 		{
 			SimplePushConstantData push{};
-			push.color = obj.color;
+			auto modelMatrix = obj.transform.mat4();
 			if (obj.space == CAMERA_SPACE) 
 			{
-				push.transform = projectionView * obj.transform.mat4();
+				push.transform = projectionView * modelMatrix;
 			}
 			if (obj.space == SCREEN_SPACE)
 			{
-				push.transform = camera.GetProjection() * obj.transform.mat4();
+				push.transform = camera.GetProjection() * modelMatrix;
 			}
+			push.normalMatrix = obj.transform.normalMatrix();
 			vkCmdPushConstants(
 				commandBuffer,
 				pipelineLayout,

@@ -33,10 +33,10 @@ namespace Quasar {
 			glfwPollEvents();
 
 			auto newTime = std::chrono::high_resolution_clock::now();
-			float frameTime = std::chrono::duration<float, std::chrono::seconds::period>(newTime - currentTime).count();
+			float dt = std::chrono::duration<float, std::chrono::seconds::period>(newTime - currentTime).count();
 			currentTime = newTime;
 
-			cameraController.MoveInPlaneXZ(window.GetGLFWwindow(), frameTime, viewerObject);
+			cameraController.MoveInPlaneXZ(window.GetGLFWwindow(), dt, viewerObject);
 			camera.SetViewYXZ(viewerObject.transform.translate, viewerObject.transform.rotation);
 
 			float aspect = renderer.GetAspectRatio();
