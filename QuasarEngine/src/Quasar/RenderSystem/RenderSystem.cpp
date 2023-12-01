@@ -2,8 +2,8 @@
 #include "RenderSystem.h"
 
 #ifdef QS_DEBUG
-	#define QS_SHADER_VERT_PATH "D:/Code/QuasarEngine/bin/Debug-windows-x86_64/Sandbox/Shader/simple_shader.vert.spv"
-	#define QS_SHADER_FRAG_PATH "D:/Code/QuasarEngine/bin/Debug-windows-x86_64/Sandbox/Shader/simple_shader.frag.spv"
+	#define QS_SHADER_VERT_PATH "D:/CODE/QuasarEngine/bin/Debug-windows-x86_64/Sandbox/Shader/simple_shader.vert.spv"
+	#define QS_SHADER_FRAG_PATH "D:/CODE/QuasarEngine/bin/Debug-windows-x86_64/Sandbox/Shader/simple_shader.frag.spv"
 #else
 	#define QS_SHADER_VERT_PATH "Shader/simple_shader.vert.spv"
 	#define QS_SHADER_FRAG_PATH "Shader/simple_shader.frag.spv"
@@ -74,13 +74,16 @@ namespace Quasar {
 
 		for (auto& obj : gameObjects)
 		{
-			obj.transform.rotation.y = glm::mod(obj.transform.rotation.y + .01f, glm::two_pi<float>());
-			obj.transform.rotation.x = glm::mod(obj.transform.rotation.x + .005f, glm::two_pi<float>());
-
 			SimplePushConstantData push{};
 			push.color = obj.color;
-			push.transform = projectionView * obj.transform.mat4();
-
+			if (obj.space == CAMERA_SPACE) 
+			{
+				push.transform = projectionView * obj.transform.mat4();
+			}
+			if (obj.space == SCREEN_SPACE)
+			{
+				push.transform = camera.GetProjection() * obj.transform.mat4();
+			}
 			vkCmdPushConstants(
 				commandBuffer,
 				pipelineLayout,
