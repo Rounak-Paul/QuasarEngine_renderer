@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Device.h"
-#include <Quasar/Model/Model.h>
+#include "Model.h"
 
 namespace Quasar {
 

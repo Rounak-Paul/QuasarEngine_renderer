@@ -14,7 +14,7 @@ namespace Quasar {
 	struct SimplePushConstantData
 	{
 		glm::mat4 transform{ 1.0f };
-		alignas(16) glm::vec3 color;
+		glm::mat4 normalMatrix{ 1.0f };
 	};
 
 	RenderSystem::RenderSystem(Device& device, VkRenderPass renderPass) : _device(device)
@@ -66,34 +66,35 @@ namespace Quasar {
 			);
 	}
 
-	void RenderSystem::RenderGameObjects(VkCommandBuffer commandBuffer, std::vector<GameObject>& gameObjects, const Camera& camera)
+	void RenderSystem::RenderGameObjects(FrameInfo& frameInfo, std::vector<GameObject>& gameObjects)
 	{
-		pipeline->Bind(commandBuffer);
+		pipeline->Bind(frameInfo.commandBuffer);
 
-		auto projectionView = camera.GetProjection() * camera.GetView();
+		auto projectionView = frameInfo.camera.GetProjection() * frameInfo.camera.GetView();
 
 		for (auto& obj : gameObjects)
 		{
 			SimplePushConstantData push{};
-			push.color = obj.color;
+			auto modelMatrix = obj.transform.mat4();
 			if (obj.space == CAMERA_SPACE) 
 			{
-				push.transform = projectionView * obj.transform.mat4();
+				push.transform = projectionView * modelMatrix;
 			}
 			if (obj.space == SCREEN_SPACE)
 			{
-				push.transform = camera.GetProjection() * obj.transform.mat4();
+				push.transform = frameInfo.camera.GetProjection() * modelMatrix;
 			}
+			push.normalMatrix = obj.transform.normalMatrix();
 			vkCmdPushConstants(
-				commandBuffer,
+				frameInfo.commandBuffer,
 				pipelineLayout,
 				VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT,
 				0,
 				sizeof(SimplePushConstantData),
 				&push);
 
-			obj.model->Bind(commandBuffer);
-			obj.model->Draw(commandBuffer);
+			obj.model->Bind(frameInfo.commandBuffer);
+			obj.model->Draw(frameInfo.commandBuffer);
 		}
 	}
 }
