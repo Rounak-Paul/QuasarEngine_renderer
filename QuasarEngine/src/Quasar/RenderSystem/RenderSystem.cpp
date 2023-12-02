@@ -66,11 +66,11 @@ namespace Quasar {
 			);
 	}
 
-	void RenderSystem::RenderGameObjects(VkCommandBuffer commandBuffer, std::vector<GameObject>& gameObjects, const Camera& camera)
+	void RenderSystem::RenderGameObjects(FrameInfo& frameInfo, std::vector<GameObject>& gameObjects)
 	{
-		pipeline->Bind(commandBuffer);
+		pipeline->Bind(frameInfo.commandBuffer);
 
-		auto projectionView = camera.GetProjection() * camera.GetView();
+		auto projectionView = frameInfo.camera.GetProjection() * frameInfo.camera.GetView();
 
 		for (auto& obj : gameObjects)
 		{
@@ -82,19 +82,19 @@ namespace Quasar {
 			}
 			if (obj.space == SCREEN_SPACE)
 			{
-				push.transform = camera.GetProjection() * modelMatrix;
+				push.transform = frameInfo.camera.GetProjection() * modelMatrix;
 			}
 			push.normalMatrix = obj.transform.normalMatrix();
 			vkCmdPushConstants(
-				commandBuffer,
+				frameInfo.commandBuffer,
 				pipelineLayout,
 				VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT,
 				0,
 				sizeof(SimplePushConstantData),
 				&push);
 
-			obj.model->Bind(commandBuffer);
-			obj.model->Draw(commandBuffer);
+			obj.model->Bind(frameInfo.commandBuffer);
+			obj.model->Draw(frameInfo.commandBuffer);
 		}
 	}
 }

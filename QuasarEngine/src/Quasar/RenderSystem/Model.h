@@ -1,6 +1,8 @@
 #pragma once
 #include "qspch.h"
-#include <Quasar/RenderSystem/Device.h>
+
+#include "Buffer.h"
+#include "Device.h"
 
 namespace Quasar 
 {
@@ -49,15 +51,13 @@ namespace Quasar
 		void CreateVertexBuffers(const std::vector<Vertex>& vertices);
 		void CreateIndexBuffers(const std::vector<uint32_t>& indices);
 
-		Device& qsDevice;
+		Device& _device;
 
-		VkBuffer vertexBuffer;
-		VkDeviceMemory vertexBufferMemory;
+		std::unique_ptr<Buffer> vertexBuffer;
 		uint32_t vertexCount;
 		
 		bool hasIndexBuffer = false;
-		VkBuffer indexBuffer;
-		VkDeviceMemory indexBufferMemory;
+		std::unique_ptr<Buffer> indexBuffer;
 		uint32_t indexCount;
 	};
 }

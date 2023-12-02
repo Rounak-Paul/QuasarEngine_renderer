@@ -4,7 +4,7 @@
 #define SCREEN_SPACE 1
 #define WORLD_SPACE 2
 
-#include <Quasar/Model/Model.h>
+#include <Quasar/RenderSystem/Model.h>
 
 namespace Quasar
 {

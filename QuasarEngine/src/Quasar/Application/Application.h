@@ -3,8 +3,10 @@
 
 #include <Quasar/Core.h>
 
-#include <Quasar/Model/Model.h>
+#include <Quasar/RenderSystem/Model.h>
 #include <Quasar/RenderSystem/RenderSystem.h>
+#include <Quasar/RenderSystem/Buffer.h>
+#include <Quasar/RenderSystem/FrameInfo.h>
 #include <Quasar/GameObject/GameObject.h>
 
 namespace Quasar {
