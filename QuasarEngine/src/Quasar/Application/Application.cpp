@@ -5,6 +5,7 @@
 
 namespace Quasar {
 
+	
 	struct GlobalUbo
 	{
 		glm::mat4 projectionView{ 1.0f };
