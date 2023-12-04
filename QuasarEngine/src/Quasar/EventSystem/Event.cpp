@@ -8,8 +8,7 @@ Author		:		Rounak Paul
 Email		:		paulrounak1999@gmail.com
 Date		:		4th Dec 2023
 
-Description	:		Camera class, contains methods related to various
-					transformations responsible for projection to camera space
+Description	:		Event class implementation
 -------------------------------------------------------------------------------
 */
 

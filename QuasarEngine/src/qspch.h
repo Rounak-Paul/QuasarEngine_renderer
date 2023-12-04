@@ -1,3 +1,17 @@
+/*
+-------------------------------------------------------------------------------
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Vector4 Studios <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+Application	:		Quasar Engine
+
+Author		:		Rounak Paul
+Email		:		paulrounak1999@gmail.com
+Date		:		4th Dec 2023
+
+Description	:		Pre compiled header, include in all Quasar core scripts.
+-------------------------------------------------------------------------------
+*/
+
 #pragma once
 
 #define GLFW_INCLUDE_VULKAN

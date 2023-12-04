@@ -15,15 +15,11 @@ namespace Quasar
 		glm::vec3 rotation{};
 
 		/// <summary>
-		///		<para>
-		///			Matrix corresponds to translate * Ry * Rx * Rz * scale transformation
-		///		</para> 
-		///		<para>
-		///			Rotation convention: tait-bryan angles with axis order Y(1), X(2), Z(3)
-		///		</para>
+		///	Matrix corresponds to translate * Ry * Rx * Rz * scale transformation.
+		///	Rotation convention: tait-bryan angles with axis order Y(1), X(2), Z(3)
 		/// </summary>
 		/// <returns>
-		///		glm::mat4 transform
+		///	glm::mat4 transform
 		/// </returns>
 		glm::mat4 mat4();
 
