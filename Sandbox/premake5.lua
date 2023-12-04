@@ -7,13 +7,6 @@ project "Sandbox"
 	targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
 
-	SHADER_TARGET = "%{wks.location}bin/" .. outputdir .. "/%{prj.name}/Shader"
-
-	prebuildcommands 
-	{
-		(SHADER_COMPILER_SCRIPT .. " " .. VULKAN_SDK .. " " .. SHADER_TARGET)
-	}
-
 	files
 	{
 		"src/**.h",

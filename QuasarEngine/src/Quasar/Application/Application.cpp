@@ -1,3 +1,17 @@
+/*
+-------------------------------------------------------------------------------
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Vector4 Studios <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+Application	:		Quasar Engine
+
+Author		:		Rounak Paul
+Email		:		paulrounak1999@gmail.com
+Date		:		4th Dec 2023
+
+Description	:		Quasar::Application implementation
+-------------------------------------------------------------------------------
+*/
+
 #include "qspch.h"
 #include "Application.h"
 
@@ -5,6 +19,7 @@
 
 namespace Quasar {
 
+	
 	struct GlobalUbo
 	{
 		glm::mat4 projectionView{ 1.0f };

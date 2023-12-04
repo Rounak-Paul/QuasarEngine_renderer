@@ -33,6 +33,7 @@
 #include <cstring>
 #include <set>
 
+#include <Quasar/Core.h>
 #include <Quasar/Log/Log.h>
 #include <Quasar/Camera/Camera.h>
 #include <Quasar/GameObject/GameObject.h>
