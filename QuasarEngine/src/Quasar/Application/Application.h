@@ -1,3 +1,19 @@
+/*
+-------------------------------------------------------------------------------
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Vector4 Studios <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+Application	:		Quasar Engine
+
+Author		:		Rounak Paul
+Email		:		paulrounak1999@gmail.com
+Date		:		4th Dec 2023
+
+Description	:		The Application class is the main interface between the 
+					Urse Application and Quasar Engine. Create an instance of 
+					this class and call Run() to start the Main Engine. 
+-------------------------------------------------------------------------------
+*/
+
 #pragma once
 #include "qspch.h"
 

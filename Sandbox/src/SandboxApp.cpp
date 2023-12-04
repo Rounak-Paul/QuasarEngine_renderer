@@ -11,15 +11,15 @@ void TestEvent1(uint32_t i)
 class Sandbox : public Quasar::Application
 {
 public:
-	Quasar::Event event{ QS_EVENT_P1 };
+	//Quasar::Event event;
 
 	Sandbox()
 	{
-		event.Add(TestEvent1);
-		event.Add(TestEvent1);
-		event.Add(TestEvent2);
+		//event.Add(TestEvent1);
+		//event.Add(TestEvent1);
+		//event.Add(TestEvent2);
 		//event.Remove(TestEvent1);
-		event.Invoke(1);
+		//event.Invoke(1);
 	}
 	~Sandbox()
 	{

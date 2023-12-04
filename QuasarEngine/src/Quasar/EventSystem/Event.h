@@ -1,10 +1,22 @@
+/*
+-------------------------------------------------------------------------------
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Vector4 Studios <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+Application	:		Quasar Engine
+
+Author		:		Rounak Paul
+Email		:		paulrounak1999@gmail.com
+Date		:		4th Dec 2023
+
+Description	:		Event class, create, subscribe to, unsubscribe to, and 
+					execute Quasar events 
+-------------------------------------------------------------------------------
+*/
+
 #pragma once
 #include "qspch.h"
 
 #include "Quasar/Core.h"
-
-#define QS_EVENT_P1 1
-#define QS_EVENT_P0 0
 
 namespace Quasar
 {
@@ -13,9 +25,16 @@ namespace Quasar
 	public:
 		using RoutineType = void (*)(uint32_t);
 
-		Event(uint8_t priority);
+		Event();
 		~Event();
 
+		static Event& getInstance()
+		{
+			static Event instance;
+			return instance;
+		}
+
+		// deleted copy constructor and copy assignment to prevent copy
 		Event(const Event&) = delete;
 		Event& operator=(const Event&) = delete;
 
@@ -30,7 +49,6 @@ namespace Quasar
 		constexpr void EventDispatcher(uint32_t& input);
 
 		std::vector<RoutineType> routines;
-		uint8_t _priority;
 	};
 }
 
