@@ -23,6 +23,7 @@ Description	:		The Application class is the main interface between the
 #include <Quasar/RenderSystem/RenderSystem.h>
 #include <Quasar/RenderSystem/Buffer.h>
 #include <Quasar/RenderSystem/FrameInfo.h>
+#include <Quasar/RenderSystem/Descriptors.h>
 #include <Quasar/GameObject/GameObject.h>
 
 namespace Quasar {
@@ -61,6 +62,8 @@ namespace Quasar {
 		Device device{ window };
 		Renderer renderer{ window, device };
 
+		// note: order of declarations matters
+		std::unique_ptr<DescriptorPool> globalPool{};
 		std::vector<GameObject> gameObjects;
 	};
 
