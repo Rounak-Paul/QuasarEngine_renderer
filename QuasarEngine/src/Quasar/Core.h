@@ -1,3 +1,17 @@
+/*
+-------------------------------------------------------------------------------
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Vector4 Studios <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+Application	:		Quasar Engine
+
+Author		:		Rounak Paul
+Email		:		paulrounak1999@gmail.com
+Date		:		4th Dec 2023
+
+Description	:		Defination for Quasar API import/export
+-------------------------------------------------------------------------------
+*/
+
 #pragma once
 
 #ifdef QS_PLATFORM_WINDOWS

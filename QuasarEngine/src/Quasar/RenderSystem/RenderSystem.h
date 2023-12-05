@@ -17,7 +17,7 @@ namespace Quasar {
 	class RenderSystem
 	{
 	public:
-		RenderSystem(Device& device, VkRenderPass renderPass);
+		RenderSystem(Device& device, VkRenderPass renderPass, VkDescriptorSetLayout globalSetLayout);
 		~RenderSystem();
 
 		RenderSystem(const RenderSystem&) = delete;
@@ -25,7 +25,7 @@ namespace Quasar {
 
 		void RenderGameObjects(FrameInfo& frameInfo, std::vector<GameObject>& gameObjects);
 	private:
-		void CreatePipelineLayout();
+		void CreatePipelineLayout(VkDescriptorSetLayout globalSetLayout);
 		void CreatePipeline(VkRenderPass renderPass);
 		
 
