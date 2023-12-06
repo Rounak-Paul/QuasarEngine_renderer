@@ -1,3 +1,17 @@
+/*
+-------------------------------------------------------------------------------
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Vector4 Studios <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+Application	:		Quasar Engine
+
+Author		:		Rounak Paul
+Email		:		paulrounak1999@gmail.com
+Date		:		4th Dec 2023
+
+Description	:		Quasar::Camera implementation
+-------------------------------------------------------------------------------
+*/
+
 #include "qspch.h"
 #include "Camera.h"
 
@@ -25,6 +39,7 @@ namespace Quasar
 		projectionMatrix[2][3] = 1.f;
 		projectionMatrix[3][2] = -(farPlane * nearPlane) / (farPlane - nearPlane);
 	}
+
 
 	void Camera::SetViewDirection(glm::vec3 position, glm::vec3 direction, glm::vec3 up) {
 		const glm::vec3 w{ glm::normalize(direction) };

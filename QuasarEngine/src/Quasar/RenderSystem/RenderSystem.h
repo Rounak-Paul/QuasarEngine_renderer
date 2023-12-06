@@ -3,12 +3,13 @@
 
 #include <Quasar/Core.h>
 
-#include <Quasar/Model/Model.h>
+#include "Model.h"
 #include "Device.h"
 #include "Pipeline.h"
 #include <Quasar/Window/Window.h>
 #include "Renderer.h"
 #include "SwapChain.h"
+#include "FrameInfo.h"
 #include <Quasar/GameObject/GameObject.h>
 
 namespace Quasar {
@@ -16,15 +17,15 @@ namespace Quasar {
 	class RenderSystem
 	{
 	public:
-		RenderSystem(Device& device, VkRenderPass renderPass);
+		RenderSystem(Device& device, VkRenderPass renderPass, VkDescriptorSetLayout globalSetLayout);
 		~RenderSystem();
 
 		RenderSystem(const RenderSystem&) = delete;
 		RenderSystem& operator=(const RenderSystem&) = delete;
 
-		void RenderGameObjects(VkCommandBuffer commandBuffer, std::vector<GameObject>& gameObjects, const Camera& camera);
+		void RenderGameObjects(FrameInfo& frameInfo, std::vector<GameObject>& gameObjects);
 	private:
-		void CreatePipelineLayout();
+		void CreatePipelineLayout(VkDescriptorSetLayout globalSetLayout);
 		void CreatePipeline(VkRenderPass renderPass);
 		
 

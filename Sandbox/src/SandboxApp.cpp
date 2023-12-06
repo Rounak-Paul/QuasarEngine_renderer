@@ -11,7 +11,7 @@ void TestEvent1(uint32_t i)
 class Sandbox : public Quasar::Application
 {
 public:
-	Quasar::Event event{ QS_EVENT_P1 };
+	Quasar::Event event;
 
 	Sandbox()
 	{

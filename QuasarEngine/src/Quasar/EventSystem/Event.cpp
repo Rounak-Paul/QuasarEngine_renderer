@@ -1,11 +1,25 @@
+/*
+-------------------------------------------------------------------------------
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Vector4 Studios <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+Application	:		Quasar Engine
+
+Author		:		Rounak Paul
+Email		:		paulrounak1999@gmail.com
+Date		:		4th Dec 2023
+
+Description	:		Event class implementation
+-------------------------------------------------------------------------------
+*/
+
 #include "qspch.h"
 #include "Event.h"
 
 namespace Quasar
 {
-	Event::Event(uint8_t priority) : _priority{ priority }
+	Event::Event()
 	{
-		QS_CORE_TRACE("Event created with priority: {0}", _priority);
+		QS_CORE_TRACE("Event created");
 	}
 
 	Event::~Event()
@@ -27,25 +41,12 @@ namespace Quasar
 	void Event::Invoke(uint32_t input)
 	{
 		EventDispatcher(input);
-
-
-
 	}
 
 	constexpr void Event::EventDispatcher(uint32_t& input)
 	{
-		switch (_priority)
-		{
-		case 0:
-
-			return;
-
-		default:
-
-			for (const RoutineType routine : routines) {
-				routine(input);
-			}
-			return;
+		for (const RoutineType routine : routines) {
+			routine(input);
 		}
 	}
 }

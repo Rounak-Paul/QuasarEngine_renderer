@@ -1,21 +1,35 @@
+/*
+-------------------------------------------------------------------------------
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Vector4 Studios <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+Application	:		Quasar Engine
+
+Author		:		Rounak Paul
+Email		:		paulrounak1999@gmail.com
+Date		:		4th Dec 2023
+
+Description	:		The Application class is the main interface between the 
+					Urse Application and Quasar Engine. Create an instance of 
+					this class and call Run() to start the Main Engine. 
+-------------------------------------------------------------------------------
+*/
+
 #pragma once
 #include "qspch.h"
 
 #include <Quasar/Core.h>
 
-#include <Quasar/Model/Model.h>
+#include <Quasar/RenderSystem/Model.h>
 #include <Quasar/RenderSystem/RenderSystem.h>
+#include <Quasar/RenderSystem/Buffer.h>
+#include <Quasar/RenderSystem/FrameInfo.h>
+#include <Quasar/RenderSystem/Descriptors.h>
 #include <Quasar/GameObject/GameObject.h>
 
 namespace Quasar {
 
 	/// <summary>
-	///		<para>
-	///			Quasar Application
-	///		</para>
-	///		<para>
-	///			Main application to instantiate Quasae Engine. Performs main application loop. 
-	///		</para>
+	/// Create and Run main Application
 	/// </summary>
 	class QUASAR_API Application
 	{
@@ -26,6 +40,9 @@ namespace Quasar {
 		Application(const Application&) = delete;
 		Application& operator=(const Application&) = delete;
 
+		/// <summary>
+		/// Performs update and draw calls.
+		/// </summary>
 		void Run();
 
 		static constexpr int WIDTH = 800;
@@ -34,12 +51,19 @@ namespace Quasar {
 	private:
 		void LoadGameObjects();
 
+		/// <summary>
+		/// Prints FPS in Debug mode every 1s, To be called in a Loop.
+		/// </summary>
+		/// <param name="frames"></param>
+		/// <param name="startTime"></param>
 		void FPS(int& frames, std::chrono::time_point<std::chrono::high_resolution_clock>& startTime);
 
 		Window window{ WIDTH, HEIGHT, "QuasarEngine" };
 		Device device{ window };
 		Renderer renderer{ window, device };
 
+		// note: order of declarations matters
+		std::unique_ptr<DescriptorPool> globalPool{};
 		std::vector<GameObject> gameObjects;
 	};
 

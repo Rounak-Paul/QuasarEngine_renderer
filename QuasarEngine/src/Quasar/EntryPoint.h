@@ -1,3 +1,18 @@
+/*
+-------------------------------------------------------------------------------
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Vector4 Studios <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+Application	:		Quasar Engine
+
+Author		:		Rounak Paul
+Email		:		paulrounak1999@gmail.com
+Date		:		4th Dec 2023
+
+Description	:		Entry Point for the User Application. Contains main() 
+					function. Execution stats here.
+-------------------------------------------------------------------------------
+*/
+
 #pragma once
 
 #ifdef QS_PLATFORM_WINDOWS
@@ -5,7 +20,7 @@
 extern Quasar::Application* Quasar::CreateApplication();
 
 /// <summary>
-/// Init method for Core Engine
+/// Init methods for Core Engine
 /// </summary>
 void init() {
 	Quasar::Log::Init();

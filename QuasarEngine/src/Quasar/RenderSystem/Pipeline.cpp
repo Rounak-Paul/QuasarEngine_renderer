@@ -119,7 +119,6 @@ namespace Quasar {
 		{
 			QS_CORE_ERROR("Failed to create shader module!");
 		}
-
 	}
 
 	void Pipeline::Bind(VkCommandBuffer commandBuffer)
