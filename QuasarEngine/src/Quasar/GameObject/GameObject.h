@@ -1,3 +1,18 @@
+/*
+-------------------------------------------------------------------------------
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Vector4 Studios <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+Application	:		Quasar Engine
+
+Author		:		Rounak Paul
+Email		:		paulrounak1999@gmail.com
+Date		:		4th Dec 2023
+
+Description	:		Instance of this contains properties like transform and 
+					other specific features for a gameobject.
+-------------------------------------------------------------------------------
+*/
+
 #pragma once
 
 #define CAMERA_SPACE 0
@@ -30,6 +45,7 @@ namespace Quasar
 	{
 	public:
 		using id_t = unsigned int;
+		using Map = std::unordered_map<id_t, GameObject>;
 
 		static GameObject CreateGameObject()
 		{

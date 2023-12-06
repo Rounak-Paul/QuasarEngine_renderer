@@ -1,3 +1,18 @@
+/*
+-------------------------------------------------------------------------------
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Vector4 Studios <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+Application	:		Quasar Engine
+
+Author		:		Rounak Paul
+Email		:		paulrounak1999@gmail.com
+Date		:		4th Dec 2023
+
+Description	:		Wraper for spdlog. Trace methods are not compiled in 
+					Release.
+-------------------------------------------------------------------------------
+*/
+
 #pragma once
 
 #include "Quasar/Core.h"

@@ -68,7 +68,7 @@ namespace Quasar {
 			);
 	}
 
-	void RenderSystem::RenderGameObjects(FrameInfo& frameInfo, std::vector<GameObject>& gameObjects)
+	void RenderSystem::RenderGameObjects(FrameInfo& frameInfo)
 	{
 		pipeline->Bind(frameInfo.commandBuffer);
 
@@ -82,8 +82,10 @@ namespace Quasar {
 			0,
 			nullptr);
 
-		for (auto& obj : gameObjects)
-		{
+		for (auto& kv : frameInfo.gameObjects) {
+			auto& obj = kv.second;
+			if (obj.model == nullptr) continue;
+
 			SimplePushConstantData push{};
 			push.modelMatrix = obj.transform.mat4();
 			push.normalMatrix = obj.transform.normalMatrix();

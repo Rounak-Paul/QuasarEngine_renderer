@@ -1,3 +1,17 @@
+/*
+-------------------------------------------------------------------------------
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Vector4 Studios <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+Application	:		Quasar Engine
+
+Author		:		Rounak Paul
+Email		:		paulrounak1999@gmail.com
+Date		:		4th Dec 2023
+
+Description	:		Log class implementation
+-------------------------------------------------------------------------------
+*/
+
 #include "qspch.h"
 #include "Log.h"
 

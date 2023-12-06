@@ -22,8 +22,11 @@ namespace Quasar {
 	
 	struct GlobalUbo
 	{
-		alignas(16) glm::mat4 projectionView{ 1.0f };
-		alignas(16) glm::vec3 lightDirection = glm::normalize(glm::vec3{ 1.f, -3.f, -1.f });
+		glm::mat4 projectionView{ 1.0f };
+
+		glm::vec4 ambientLightColor{ 1.f, 1.f, 1.f, .02f };  // w is intensity
+		glm::vec3 lightPosition{ -1.f };
+		alignas(16) glm::vec4 lightColor{ 1.f };  // w is light intensity
 	};
 
 	Application::Application() {
@@ -53,7 +56,7 @@ namespace Quasar {
 
 		auto globalSetLayout =
 			DescriptorSetLayout::Builder(device)
-			.addBinding(0, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, VK_SHADER_STAGE_VERTEX_BIT)
+			.addBinding(0, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, VK_SHADER_STAGE_ALL_GRAPHICS)
 			.build();
 
 		std::vector<VkDescriptorSet> globalDescriptorSets(SwapChain::MAX_FRAMES_IN_FLIGHT);
@@ -74,6 +77,7 @@ namespace Quasar {
 		camera.SetViewTarget(glm::vec3{ -1.f, -2.f, 2.f }, glm::vec3{ 0.0f, 0.0f, 2.5f });
 
 		auto viewerObject = GameObject::CreateGameObject();
+		viewerObject.transform.translate.z = -2.5f;
 		KeyboardMovementController cameraController{};
 
 		// Initialize variables for FPS calculation
@@ -95,12 +99,20 @@ namespace Quasar {
 			camera.SetViewYXZ(viewerObject.transform.translate, viewerObject.transform.rotation);
 
 			float aspect = renderer.GetAspectRatio();
-			camera.SetPerspectiveProjection(glm::radians(50.0f), aspect, 0.1f, 10.0f);
+			camera.SetPerspectiveProjection(glm::radians(50.0f), aspect, 0.1f, 100.0f);
 
 			if (auto commandBuffer = renderer.BeginFrame())
 			{
 				int frameIndex = renderer.GetFrameIndex();
-				FrameInfo frameInfo{ frameIndex, dt, commandBuffer, camera, globalDescriptorSets[frameIndex]};
+				FrameInfo frameInfo
+				{ 
+					frameIndex, 
+					dt, 
+					commandBuffer, 
+					camera, 
+					globalDescriptorSets[frameIndex],
+					gameObjects
+				};
 
 				// update
 				GlobalUbo ubo{};
@@ -110,7 +122,7 @@ namespace Quasar {
 
 				// render
 				renderer.BeginSwapChainRenderPass(commandBuffer);
-				renderSystem.RenderGameObjects(frameInfo, gameObjects);
+				renderSystem.RenderGameObjects(frameInfo);
 				renderer.EndSwapChainRenderPass(commandBuffer);
 
 				renderer.EndFrame();
@@ -124,15 +136,19 @@ namespace Quasar {
 
 	void Application::LoadGameObjects()
 	{
-		std::shared_ptr<Model> model = Model::CreateModelFromFile(device, "D:/CODE/QuasarEngine/Sandbox/models/smooth_vase.obj");
-
+		std::shared_ptr<Model> cubeModel = Model::CreateModelFromFile(device, "D:/CODE/QuasarEngine/Sandbox/models/smooth_vase.obj");
 		auto cube = GameObject::CreateGameObject();
-		cube.model = model;
-		cube.transform.translate = { 0.0f, 0.0f, 2.5f };
+		cube.model = cubeModel;
+		cube.transform.translate = { 0.0f, 0.5f, 0.f };
 		cube.transform.scale = { 0.5f, 0.5f, 0.5f };
+		gameObjects.emplace(cube.GetId(), std::move(cube));
 
-		gameObjects.push_back(std::move(cube));
-
+		std::shared_ptr<Model> quadModel = Model::CreateModelFromFile(device, "D:/CODE/QuasarEngine/Sandbox/models/quad.obj");
+		auto floor = GameObject::CreateGameObject();
+		floor.model = quadModel;
+		floor.transform.translate = { 0.0f, 0.5f, 0.f };
+		floor.transform.scale = { 3.f, 1.f, 3.f };
+		gameObjects.emplace(floor.GetId(), std::move(floor));
 	}
 
 	void Application::FPS(int& frames, std::chrono::time_point<std::chrono::high_resolution_clock>& startTime)
