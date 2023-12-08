@@ -51,7 +51,13 @@ Description	:		Pre compiled header, include in all Quasar core scripts.
 #include <Quasar/Log/Log.h>
 #include <Quasar/Camera/Camera.h>
 #include <Quasar/GameObject/GameObject.h>
-#include <Quasar/Window/Window.h>
+#include <Quasar/RenderSystem/Model.h>
+#include <Quasar/RenderSystem/Device.h>
+#include <Quasar/RenderSystem/Pipeline.h>
+#include <Quasar/RenderSystem/Renderer.h>
+#include <Quasar/RenderSystem/SwapChain.h>
+#include <Quasar/RenderSystem/FrameInfo.h>
+#include <Quasar/GameObject/GameObject.h>
 
 
 #ifdef QS_PLATFORM_WINDOWS

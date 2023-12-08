@@ -3,15 +3,6 @@
 
 #include <Quasar/Core.h>
 
-#include "Model.h"
-#include "Device.h"
-#include "Pipeline.h"
-#include <Quasar/Window/Window.h>
-#include "Renderer.h"
-#include "SwapChain.h"
-#include "FrameInfo.h"
-#include <Quasar/GameObject/GameObject.h>
-
 namespace Quasar {
 
 	class RenderSystem

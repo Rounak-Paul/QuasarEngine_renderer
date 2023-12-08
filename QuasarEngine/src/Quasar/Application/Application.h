@@ -20,7 +20,8 @@ Description	:		The Application class is the main interface between the
 #include <Quasar/Core.h>
 
 #include <Quasar/RenderSystem/Model.h>
-#include <Quasar/RenderSystem/RenderSystem.h>
+#include <Quasar/RenderSystem/Systems/RenderSystem.h>
+#include <Quasar/RenderSystem/Systems/PointLightSystem.h>
 #include <Quasar/RenderSystem/Buffer.h>
 #include <Quasar/RenderSystem/FrameInfo.h>
 #include <Quasar/RenderSystem/Descriptors.h>

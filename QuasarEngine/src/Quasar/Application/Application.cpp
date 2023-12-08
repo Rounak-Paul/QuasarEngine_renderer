@@ -22,7 +22,8 @@ namespace Quasar {
 	
 	struct GlobalUbo
 	{
-		glm::mat4 projectionView{ 1.0f };
+		glm::mat4 projection{ 1.0f };
+		glm::mat4 view{ 1.0f };
 
 		glm::vec4 ambientLightColor{ 1.f, 1.f, 1.f, .02f };  // w is intensity
 		glm::vec3 lightPosition{ -1.f };
@@ -67,10 +68,19 @@ namespace Quasar {
 				.build(globalDescriptorSets[i]);
 		}
 
-		RenderSystem renderSystem{
+		RenderSystem renderSystem
+		{
 			device,
 			renderer.GetSwapChainRenderPass(),
-			globalSetLayout->getDescriptorSetLayout() };
+			globalSetLayout->getDescriptorSetLayout() 
+		};
+
+		PointLightSystem pointLightSystem
+		{
+			device,
+			renderer.GetSwapChainRenderPass(),
+			globalSetLayout->getDescriptorSetLayout()
+		};
 
 		Camera camera{};
 		//camera.SetViewDirection(glm::vec3{ 0.f }, glm::vec3{ .5f, .0f, 1.f });
@@ -116,13 +126,15 @@ namespace Quasar {
 
 				// update
 				GlobalUbo ubo{};
-				ubo.projectionView = camera.GetProjection() * camera.GetView();
+				ubo.projection = camera.GetProjection();
+				ubo.view = camera.GetView();
 				uboBuffers[frameIndex]->WriteToBuffer(&ubo);
 				uboBuffers[frameIndex]->Flush();
 
 				// render
 				renderer.BeginSwapChainRenderPass(commandBuffer);
 				renderSystem.RenderGameObjects(frameInfo);
+				pointLightSystem.Render(frameInfo);
 				renderer.EndSwapChainRenderPass(commandBuffer);
 
 				renderer.EndFrame();
