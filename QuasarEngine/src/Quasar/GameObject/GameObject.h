@@ -15,10 +15,6 @@ Description	:		Instance of this contains properties like transform and
 
 #pragma once
 
-#define CAMERA_SPACE 0
-#define SCREEN_SPACE 1
-#define WORLD_SPACE 2
-
 #include <Quasar/RenderSystem/Model.h>
 
 namespace Quasar
@@ -41,6 +37,11 @@ namespace Quasar
 		glm::mat3 normalMatrix();
 	};
 
+	struct PointLightComponent
+	{
+		float lightIntensity = 1.0f;
+	};
+
 	class GameObject
 	{
 	public:
@@ -53,6 +54,8 @@ namespace Quasar
 			return GameObject(currentId++);
 		}
 
+		static GameObject MakePointLight(float intensity = 10.f, float radius = .1f, glm::vec3 color = glm::vec3(1.f));
+
 		GameObject(const GameObject&) = delete;
 		GameObject& operator=(const GameObject&) = delete;
 		GameObject(GameObject&&) = default;
@@ -60,11 +63,12 @@ namespace Quasar
 
 		const id_t GetId() { return id; }
 
-		std::shared_ptr<Model> model{};
 		glm::vec3 color{};
 		TransformComponent transform{};
-
-		int space = CAMERA_SPACE;
+		
+		// Optional pointer components
+		std::shared_ptr<Model> model{};
+		std::unique_ptr<PointLightComponent> pointLight = nullptr;
 
 	private:
 		GameObject(id_t objId) : id{objId} {}

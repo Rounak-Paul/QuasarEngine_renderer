@@ -14,6 +14,7 @@ namespace Quasar {
 		PointLightSystem(const PointLightSystem&) = delete;
 		PointLightSystem& operator=(const PointLightSystem&) = delete;
 
+		void update(FrameInfo& frameInfo, GlobalUbo& ubo);
 		void Render(FrameInfo& frameInfo);
 	private:
 		void CreatePipelineLayout(VkDescriptorSetLayout globalSetLayout);
