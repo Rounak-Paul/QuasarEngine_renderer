@@ -7,6 +7,5 @@
 *.vscode
 
 # Build Dirs
-/bin
-/bin-int
+/build
 
