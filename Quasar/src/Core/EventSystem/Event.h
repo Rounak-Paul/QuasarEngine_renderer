@@ -16,7 +16,7 @@ Description	:		Event class, create, subscribe to, unsubscribe to, and
 #pragma once
 #include "qspch.h"
 
-#include "Quasar/Core.h"
+#include "Core/Core.h"
 
 namespace Quasar
 {

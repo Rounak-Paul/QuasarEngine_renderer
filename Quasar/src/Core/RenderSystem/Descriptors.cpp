@@ -1,5 +1,5 @@
 #include "qspch.h"
-#include "descriptors.h"
+#include "Descriptors.h"
 
 namespace Quasar {
 

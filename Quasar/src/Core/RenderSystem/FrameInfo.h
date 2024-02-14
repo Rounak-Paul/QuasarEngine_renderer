@@ -1,7 +1,7 @@
 #pragma once
 #include "qspch.h"
 
-#include <Quasar/Camera/Camera.h>
+#include <Core/Camera/Camera.h>
 
 namespace Quasar {
 	struct FrameInfo {

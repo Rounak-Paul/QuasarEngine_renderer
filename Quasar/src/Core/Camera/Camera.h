@@ -15,6 +15,7 @@ Description	:		Camera class, contains methods related to various
 
 #pragma once
 #include "qspch.h"
+#include <Core/Core.h>
 
 namespace Quasar
 {

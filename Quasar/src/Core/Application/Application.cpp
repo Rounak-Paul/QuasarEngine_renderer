@@ -15,7 +15,7 @@ Description	:		Quasar::Application implementation
 #include "qspch.h"
 #include "Application.h"
 
-#include <Quasar/Input/KeyboardMovementController.h>
+#include <Core/Input/KeyboardMovementController.h>
 
 namespace Quasar {
 

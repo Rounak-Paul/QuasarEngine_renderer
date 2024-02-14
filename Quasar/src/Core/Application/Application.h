@@ -17,14 +17,14 @@ Description	:		The Application class is the main interface between the
 #pragma once
 #include "qspch.h"
 
-#include <Quasar/Core.h>
+#include <Core/Core.h>
 
-#include <Quasar/RenderSystem/Model.h>
-#include <Quasar/RenderSystem/RenderSystem.h>
-#include <Quasar/RenderSystem/Buffer.h>
-#include <Quasar/RenderSystem/FrameInfo.h>
-#include <Quasar/RenderSystem/Descriptors.h>
-#include <Quasar/GameObject/GameObject.h>
+#include <Core/RenderSystem/Model.h>
+#include <Core/RenderSystem/RenderSystem.h>
+#include <Core/RenderSystem/Buffer.h>
+#include <Core/RenderSystem/FrameInfo.h>
+#include <Core/RenderSystem/Descriptors.h>
+#include <Core/GameObject/GameObject.h>
 
 namespace Quasar {
 

@@ -10,10 +10,11 @@ endif()
 project(QuasarEngine)
 
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DQS_DEBUG")
+set(VULKAN_PATH "/Users/duke/VulkanSDK/1.3.275.0/macOS")
 
 add_subdirectory(Vendor/GLFW)
 add_subdirectory(Vendor/GLM)
-add_subdirectory(Vendor/SPDLOG)
+add_subdirectory(Vendor/LOGGER/SPDLOG)
 
 set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 

@@ -1,16 +1,16 @@
 #pragma once
 #include "qspch.h"
 
-#include <Quasar/Core.h>
+#include <Core/Core.h>
 
 #include "Model.h"
 #include "Device.h"
 #include "Pipeline.h"
-#include <Quasar/Window/Window.h>
+#include <Core/Window/Window.h>
 #include "Renderer.h"
 #include "SwapChain.h"
 #include "FrameInfo.h"
-#include <Quasar/GameObject/GameObject.h>
+#include <Core/GameObject/GameObject.h>
 
 namespace Quasar {
 

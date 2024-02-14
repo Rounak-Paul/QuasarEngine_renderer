@@ -1,7 +1,7 @@
 #include "qspch.h"
 #include "Model.h"
 
-#include <Quasar/Utils/Utils.h>
+#include <Core/Utils/Utils.h>
 
 #define TINYOBJLOADER_IMPLEMENTATION
 #include "ObjectLoader.h"

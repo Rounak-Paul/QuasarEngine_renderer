@@ -15,8 +15,15 @@ Description	:		Defination for Quasar API import/export
 #pragma once
 
 
-#ifdef QS_BUILD_DLL 
-	#define QUASAR_API __declspec(dllexport) 
-#else 
-	#define QUASAR_API __declspec(dllimport) 
+// #ifdef QS_BUILD_DLL 
+// 	#define QUASAR_API __declspec(dllexport) 
+// #else 
+// 	#define QUASAR_API __declspec(dllimport) 
+// #endif
+
+#ifdef QS_BUILD_DLL
+    #define QUASAR_API __attribute__((visibility("default")))
+#else
+    #define QUASAR_API
 #endif
+

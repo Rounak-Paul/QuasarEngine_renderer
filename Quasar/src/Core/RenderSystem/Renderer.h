@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Quasar/Window/Window.h>
+#include <Core/Window/Window.h>
 #include "Device.h"
 #include "SwapChain.h"
 
