@@ -1,13 +1,12 @@
-#include "qspch.h"
+#include <qspch.h>
 #include "RenderSystem.h"
 
-#ifdef QS_DEBUG
-	#define QS_SHADER_VERT_PATH "D:/CODE/QuasarEngine/bin/Debug-windows-x86_64/Sandbox/Shader/simple_shader.vert.spv"
-	#define QS_SHADER_FRAG_PATH "D:/CODE/QuasarEngine/bin/Debug-windows-x86_64/Sandbox/Shader/simple_shader.frag.spv"
-#else
-	#define QS_SHADER_VERT_PATH "Shader/simple_shader.vert.spv"
-	#define QS_SHADER_FRAG_PATH "Shader/simple_shader.frag.spv"
-#endif
+
+#define QS_SHADER_VERT_PATH "Shader/simple_shader.vert.spv"
+#define QS_SHADER_FRAG_PATH "Shader/simple_shader.frag.spv"
+
+
+
 
 namespace Quasar {
 

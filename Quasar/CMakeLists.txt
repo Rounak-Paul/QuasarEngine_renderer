@@ -28,9 +28,10 @@ target_link_libraries(Quasar PUBLIC spdlog)
 target_link_libraries(Quasar PUBLIC ${VULKAN_PATH}/lib/libvulkan.1.dylib)
 target_link_libraries(Quasar PUBLIC ${VULKAN_PATH}/lib/libvulkan.1.3.275.dylib)
 
-# add_custom_target(
-#     BuildShaders
-#     COMMAND ${CMAKE_COMMAND} -E env "vulkanSDKPath=${VULKAN_PATH}" "${CMAKE_CURRENT_SOURCE_DIR}/src/Shader/compile.sh" ${VULKAN_PATH} ${OUTPUT_DIR}
-#     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-#     COMMENT "Building shaders..."
-# )
+add_custom_target(
+    BuildShaders ALL
+    COMMAND chmod +x "${PROJECT_SOURCE_DIR}/Quasar/src/Shader/compile.sh"
+    COMMAND "${PROJECT_SOURCE_DIR}/Quasar/src/Shader/compile.sh" ${VULKAN_PATH} ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Shader
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+    COMMENT "Compile Shaders"
+)

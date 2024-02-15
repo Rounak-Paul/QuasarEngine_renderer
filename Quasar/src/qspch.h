@@ -46,6 +46,8 @@ Description	:		Pre compiled header, include in all Quasar core scripts.
 #include <unordered_set>
 #include <cstring>
 #include <set>
+#include <filesystem>
+#include <unistd.h>
 
 #include <Core/Core.h>
 #include <Core/Log/Log.h>

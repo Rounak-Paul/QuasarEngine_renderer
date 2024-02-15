@@ -21,6 +21,6 @@ for file in "$input_dir"/*.vert "$input_dir"/*.frag; do
     ext="${file##*.}"
     output_file="$output_dir/$filename.$ext.spv"
 
-    echo "$vulkanSDKPath/macOS/bin/glslc" "$file" -o "$output_file"
-    "$vulkanSDKPath/macOS/bin/glslc" "$file" -o "$output_file"
+    echo "$vulkanSDKPath/bin/glslc" "$file" -o "$output_file"
+    "$vulkanSDKPath/bin/glslc" "$file" -o "$output_file"
 done
