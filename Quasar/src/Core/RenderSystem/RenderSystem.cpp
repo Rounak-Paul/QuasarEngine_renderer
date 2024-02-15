@@ -5,9 +5,6 @@
 #define QS_SHADER_VERT_PATH "Shader/simple_shader.vert.spv"
 #define QS_SHADER_FRAG_PATH "Shader/simple_shader.frag.spv"
 
-
-
-
 namespace Quasar {
 
 	struct SimplePushConstantData
