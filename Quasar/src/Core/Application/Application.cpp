@@ -124,7 +124,7 @@ namespace Quasar {
 
 	void Application::LoadGameObjects()
 	{
-		std::shared_ptr<Model> model = Model::CreateModelFromFile(device, "D:/CODE/QuasarEngine/Sandbox/models/smooth_vase.obj");
+		std::shared_ptr<Model> model = Model::CreateModelFromFile(device, "/Users/duke/Code/QuasarEngine/Editor/models/smooth_vase.obj");
 
 		auto cube = GameObject::CreateGameObject();
 		cube.model = model;

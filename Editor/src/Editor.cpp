@@ -8,12 +8,12 @@ void TestEvent1(uint32_t i)
 	std::cout << "Event2 passed: " << i << std::endl;
 }
 
-class Sandbox : public Quasar::Application
+class Editor : public Quasar::Application
 {
 public:
 	Quasar::Event event;
 
-	Sandbox()
+	Editor()
 	{
 		event.Add(TestEvent1);
 		event.Add(TestEvent1);
@@ -21,7 +21,7 @@ public:
 		//event.Remove(TestEvent1);
 		event.Invoke(1);
 	}
-	~Sandbox()
+	~Editor()
 	{
 
 	}
@@ -29,5 +29,5 @@ public:
 
 Quasar::Application* Quasar::CreateApplication()
 {
-	return new Sandbox();
+	return new Editor();
 };

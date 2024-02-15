@@ -18,12 +18,12 @@ Description	:		Quasar Core classes exposed to User. Set class as
 
 // For use by Quasar applications
 
-#include "Quasar/Application/Application.h"
-#include "Quasar/Log/Log.h"
-#include "Quasar/EventSystem/Event.h"
+#include "Core/Application/Application.h"
+#include "Core/Log/Log.h"
+#include "Core/EventSystem/Event.h"
 
 // ----- Entry Point -----
 
-#include "Quasar/EntryPoint.h"
+#include "Core/EntryPoint.h"
 
 // -----------------------

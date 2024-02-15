@@ -27,7 +27,7 @@ namespace Quasar
 		if (vkAllocateCommandBuffers(_device.device(), &allocateInfo, commandBuffers.data()) !=
 			VK_SUCCESS)
 		{
-			QS_CORE_ERROR("Failed to cllocate command buffers!");
+			QS_CORE_ERROR("Failed to allocate command buffers!");
 		}
 	}
 

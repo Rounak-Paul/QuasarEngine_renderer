@@ -15,8 +15,6 @@ Description	:		Entry Point for the User Application. Contains main()
 
 #pragma once
 
-#ifdef QS_PLATFORM_WINDOWS
-
 extern Quasar::Application* Quasar::CreateApplication();
 
 /// <summary>
@@ -35,5 +33,3 @@ int main(int argc, char** argv)
 	app->Run();
 	delete app;
 }
-
-#endif
