@@ -7,3 +7,7 @@
 [submodule "vendor/LOGGER/SPDLOG"]
 	path = vendor/LOGGER/SPDLOG
 	url = https://github.com/gabime/spdlog.git
+[submodule "vendor/GUI/DEARIMGUI"]
+	path = vendor/GUI/DEARIMGUI
+	url = https://github.com/Rounak-Paul/imgui.git
+	branch = docking

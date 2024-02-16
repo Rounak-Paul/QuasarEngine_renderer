@@ -18,7 +18,7 @@ target_include_directories(Quasar PUBLIC src)
 target_include_directories(Quasar PUBLIC ${PROJECT_SOURCE_DIR}/vendor/GLFW/include)
 target_include_directories(Quasar PUBLIC ${PROJECT_SOURCE_DIR}/vendor/GLM)
 target_include_directories(Quasar PUBLIC ${PROJECT_SOURCE_DIR}/vendor/LOGGER/SPDLOG/include)
-target_include_directories(Quasar PUBLIC ${PROJECT_SOURCE_DIR}/vendor/DEARIMGUI)
+target_include_directories(Quasar PUBLIC ${PROJECT_SOURCE_DIR}/vendor/GUI/DEARIMGUI)
 target_include_directories(Quasar PUBLIC ${VULKAN_PATH}/include)
 
 target_link_directories(Quasar PUBLIC ${VULKAN_PATH}/lib)

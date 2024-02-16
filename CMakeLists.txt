@@ -17,7 +17,7 @@ set(ENV{VK_LAYER_PATH} "${VULKAN_PATH}/share/vulkan/explicit_layer.d")
 add_subdirectory(vendor/GLFW)
 add_subdirectory(vendor/GLM)
 add_subdirectory(vendor/LOGGER/SPDLOG)
-add_subdirectory(vendor/DEARIMGUI)
+add_subdirectory(vendor/GUI/DEARIMGUI)
 
 set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
