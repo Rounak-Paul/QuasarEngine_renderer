@@ -1,0 +1,23 @@
+add_library(imgui 
+    imgui.h
+    imgui_demo.cpp
+    imgui_draw.cpp 
+    imgui_internal.h 
+    imgui_tables.cpp 
+    imgui_widgets.cpp 
+    imgui.cpp 
+    imconfig.h 
+    imstb_textedit.h 
+    imstb_truetype.h 
+    imstb_rectpack.h 
+    backends/imgui_impl_vulkan.cpp 
+    backends/imgui_impl_vulkan.h 
+    backends/imgui_impl_glfw.h
+    backends/imgui_impl_glfw.cpp
+)
+
+set_target_properties(imgui PROPERTIES LINKER_LANGUAGE CXX)
+
+target_include_directories(imgui PUBLIC .)
+target_include_directories(imgui PUBLIC ${VULKAN_PATH}/include)
+target_include_directories(imgui PUBLIC ${PROJECT_SOURCE_DIR}/vendor/GLFW/include)

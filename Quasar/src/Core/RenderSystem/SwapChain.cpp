@@ -383,12 +383,12 @@ VkPresentModeKHR SwapChain::chooseSwapPresentMode(const std::vector<VkPresentMod
 		}
 	}
 
-  for (const auto &availablePresentMode : availablePresentModes) {
-    if (availablePresentMode == VK_PRESENT_MODE_IMMEDIATE_KHR) {
-      if (QS_DEBUG) QS_CORE_TRACE("Present mode: Immediate");
-      return availablePresentMode;
-    }
-  }
+  // for (const auto &availablePresentMode : availablePresentModes) {
+  //   if (availablePresentMode == VK_PRESENT_MODE_IMMEDIATE_KHR) {
+  //     if (QS_DEBUG) QS_CORE_TRACE("Present mode: Immediate");
+  //     return availablePresentMode;
+  //   }
+  // }
 
   QS_CORE_TRACE("Present mode: V-Sync");
   return VK_PRESENT_MODE_FIFO_KHR;

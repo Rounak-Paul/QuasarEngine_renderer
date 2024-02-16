@@ -14,9 +14,10 @@ set(VULKAN_PATH "/Users/duke/VulkanSDK/1.3.275.0/macOS")
 set(ENV{VK_ICD_FILENAMES} "${VULKAN_PATH}/share/vulkan/icd.d/MoltenVK_icd.json")
 set(ENV{VK_LAYER_PATH} "${VULKAN_PATH}/share/vulkan/explicit_layer.d")
 
-add_subdirectory(Vendor/GLFW)
-add_subdirectory(Vendor/GLM)
-add_subdirectory(Vendor/LOGGER/SPDLOG)
+add_subdirectory(vendor/GLFW)
+add_subdirectory(vendor/GLM)
+add_subdirectory(vendor/LOGGER/SPDLOG)
+add_subdirectory(vendor/DEARIMGUI)
 
 set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
