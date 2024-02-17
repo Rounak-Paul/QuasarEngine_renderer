@@ -23,7 +23,7 @@ namespace Quasar {
 	std::vector<char> Pipeline::ReadFile(const std::string& filePath)
 	{
 		std::ifstream file{ filePath, std::ios::ate | std::ios::binary };
-		if (!file.is_open()) QS_CORE_ERROR("Failed to open file!" + filePath);
+		if (!file.is_open()) QS_CORE_ERROR("Failed to open file! " + filePath);
 
 		size_t fileSize = static_cast<size_t>(file.tellg());
 		std::vector<char> buffer(fileSize);
