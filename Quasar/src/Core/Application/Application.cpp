@@ -130,7 +130,7 @@ namespace Quasar {
 		cube.model = model;
 		cube.transform.translate = { 0.0f, 0.0f, 2.5f };
 		cube.transform.scale = { 0.5f, 0.5f, 0.5f };
-
+		
 		gameObjects.push_back(std::move(cube));
 
 	}
